@@ -1,3 +1,210 @@
+// Shader code
+const MAX_COLORS = 8;
+const frag = `
+#define MAX_COLORS ${MAX_COLORS}
+uniform vec2 uCanvas;
+uniform float uTime;
+uniform float uSpeed;
+uniform vec2 uRot;
+uniform int uColorCount;
+uniform vec3 uColors[MAX_COLORS];
+uniform int uTransparent;
+uniform float uScale;
+uniform float uFrequency;
+uniform float uWarpStrength;
+uniform vec2 uPointer;
+uniform float uMouseInfluence;
+uniform float uParallax;
+uniform float uNoise;
+varying vec2 vUv;
+
+void main() {
+  float t = uTime * uSpeed;
+  vec2 p = vUv * 2.0 - 1.0;
+  p += uPointer * uParallax * 0.1;
+  vec2 rp = vec2(p.x * uRot.x - p.y * uRot.y, p.x * uRot.y + p.y * uRot.x);
+  vec2 q = vec2(rp.x * (uCanvas.x / uCanvas.y), rp.y);
+  q /= max(uScale, 0.0001);
+  q /= 0.5 + 0.2 * dot(q, q);
+  q += 0.2 * cos(t) - 7.56;
+  vec2 toward = (uPointer - rp);
+  q += toward * uMouseInfluence * 0.2;
+
+  vec3 col = vec3(0.0);
+  float a = 1.0;
+
+  vec2 s = q;
+  vec3 sumCol = vec3(0.0);
+  float cover = 0.0;
+  
+  for (int i = 0; i < MAX_COLORS; ++i) {
+    if (i >= uColorCount) break;
+    s -= 0.01;
+    vec2 r = sin(1.5 * (s.yx * uFrequency) + 2.0 * cos(s * uFrequency));
+    float m0 = length(r + sin(5.0 * r.y * uFrequency - 3.0 * t + float(i)) / 4.0);
+    float kBelow = clamp(uWarpStrength, 0.0, 1.0);
+    float kMix = pow(kBelow, 0.3);
+    float gain = 1.0 + max(uWarpStrength - 1.0, 0.0);
+    vec2 disp = (r - s) * kBelow;
+    vec2 warped = s + disp * gain;
+    float m1 = length(warped + sin(5.0 * warped.y * uFrequency - 3.0 * t + float(i)) / 4.0);
+    float m = mix(m0, m1, kMix);
+    float w = 1.0 - exp(-6.0 / exp(6.0 * m));
+    sumCol += uColors[i] * w;
+    cover = max(cover, w);
+  }
+  
+  col = clamp(sumCol, 0.0, 1.0);
+  a = uTransparent > 0 ? cover : 1.0;
+
+  if (uNoise > 0.0001) {
+    float n = fract(sin(dot(gl_FragCoord.xy + vec2(uTime), vec2(12.9898, 78.233))) * 43758.5453123);
+    col += (n - 0.5) * uNoise;
+    col = clamp(col, 0.0, 1.0);
+  }
+
+  vec3 rgb = (uTransparent > 0) ? col * a : col;
+  gl_FragColor = vec4(rgb, a);
+}
+`;
+
+const vert = `
+varying vec2 vUv;
+void main() {
+  vUv = uv;
+  gl_Position = vec4(position, 1.0);
+}
+`;
+
+// Initialize Color Bends effect
+function initColorBends() {
+  console.log('Initializing ColorBends effect...');
+  const container = document.querySelector('.hero');
+  const colorBendsContainer = document.createElement('div');
+  colorBendsContainer.className = 'color-bends-container';
+  container.appendChild(colorBendsContainer);
+  console.log('Container created');
+
+  // Mouse tracking
+  const mouse = new THREE.Vector2(0, 0);
+  const targetMouse = new THREE.Vector2(0, 0);
+  const lerpFactor = 0.05; // Ajustez cette valeur pour changer la fluidité
+
+  window.addEventListener('mousemove', (event) => {
+    // Convertir la position de la souris en coordonnées normalisées (-1 à 1)
+    targetMouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    targetMouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  });
+
+  function lerpVector2(v1, v2, alpha) {
+    v1.x += (v2.x - v1.x) * alpha;
+    v1.y += (v2.y - v1.y) * alpha;
+  }
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+  const geometry = new THREE.PlaneGeometry(2, 2);
+  
+  // Palette de couleurs bleu-violet-rose
+  const colors = [
+    new THREE.Vector3(0.69, 0.36, 0.99),    // Violet vif (#B15CFF)
+    new THREE.Vector3(0.53, 0.23, 0.96),    // Violet profond (#873BF4)
+    new THREE.Vector3(1, 0.35, 0.98),       // Rose vif (#FF59FA)
+    new THREE.Vector3(0.31, 0.44, 0.98)     // Bleu électrique (#4F71FA)
+  ];
+
+  const uColorsArray = Array.from({ length: MAX_COLORS }, (_, i) => 
+    i < colors.length ? colors[i] : new THREE.Vector3(0, 0, 0)
+  );
+  console.log('Colors initialized');
+
+  const material = new THREE.ShaderMaterial({
+    vertexShader: vert,
+    fragmentShader: frag,
+    uniforms: {
+      uCanvas: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+      uTime: { value: 0 },
+      uSpeed: { value: 0.2 },
+      uRot: { value: new THREE.Vector2(1, 0) },
+      uColorCount: { value: colors.length },
+      uColors: { value: uColorsArray },
+      uTransparent: { value: 0 },
+      uScale: { value: 1.0 },
+      uFrequency: { value: 1.0 },
+      uWarpStrength: { value: 1.0 },
+      uPointer: { value: new THREE.Vector2(0, 0) },
+      uMouseInfluence: { value: 0.5 },
+      uParallax: { value: 0.0 },
+      uNoise: { value: 0.0 }
+    },
+    transparent: true
+  });
+
+  const mesh = new THREE.Mesh(geometry, material);
+  scene.add(mesh);
+
+  const renderer = new THREE.WebGLRenderer({
+    antialias: true,
+    alpha: true
+  });
+
+  console.log('Initializing renderer...');
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.setClearColor(0x000000, 0);
+  
+  const canvas = renderer.domElement;
+  canvas.style.display = 'block';
+  colorBendsContainer.appendChild(canvas);
+  console.log('Canvas added to container');
+
+  const clock = new THREE.Clock();
+  const pointerTarget = new THREE.Vector2(0, 0);
+  const pointerCurrent = new THREE.Vector2(0, 0);
+
+  function handleResize() {
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    renderer.setSize(w, h, false);
+    material.uniforms.uCanvas.value.set(w, h);
+  }
+
+  window.addEventListener('resize', handleResize);
+
+  colorBendsContainer.addEventListener('mousemove', (e) => {
+    const rect = colorBendsContainer.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    const y = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
+    pointerTarget.set(x, y);
+  });
+
+  function animate() {
+    requestAnimationFrame(animate);
+    const elapsed = clock.getElapsedTime();
+    material.uniforms.uTime.value = elapsed;
+
+    // Mise à jour fluide de la position de la souris
+    lerpVector2(mouse, targetMouse, lerpFactor);
+    
+    // Appliquer un effet de parallaxe doux
+    const parallaxX = mouse.x * 0.1;
+    const parallaxY = mouse.y * 0.1;
+    scene.position.x = parallaxX;
+    scene.position.y = parallaxY;
+    
+    // Mettre à jour les uniformes du shader
+    material.uniforms.uPointer.value.copy(mouse);
+
+    renderer.render(scene, camera);
+  }
+
+  animate();
+}
+
+// Wait for DOM to load
+document.addEventListener('DOMContentLoaded', initColorBends);
+
 const cursor = document.querySelector('.cursor');
 const cursorFollower = document.querySelector('.cursor-follower');
 
@@ -316,14 +523,12 @@ particlesJS("particles-js", {
     }
 });
 
-// Effet de parallaxe sur le scroll
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
     const parallaxBg = document.querySelector('.parallax-bg');
     parallaxBg.style.transform = `translateY(${scrolled * 0.5}px)`;
 });
 
-// Effet de parallaxe sur le hero
 document.addEventListener('mousemove', (e) => {
     const space = document.querySelector('.space');
     const stars = document.querySelector('.stars1');
