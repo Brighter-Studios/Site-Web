@@ -3,123 +3,412 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Assets - Brighter Builds</title>
-  <link rel="stylesheet" href="css/assets.css">
+  <title>Kit de marque - Brighter Builds</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/assets.css">
   <link rel="shortcut icon" href="logo.png" type="image/png">
 </head>
 <body>
-    <header class="site-header">
-      <div class="logo">
-        <a href="index.html">
-          <img src="logo.png" alt="Logo Brighter Builds">
-          <span>Brighter Builds</span>
-        </a>
-      </div>
-      <nav class="nav">
-        <a href="projects.html">Projets</a>
-        <a href="team.html">Equipe</a>
-        <a href="recrutement.html">Recrutement</a>
-        <a href="reseaux.html">Réseaux</a>
-        <a href="https://discord.gg/8AsrS9Vtjt" target="_blank">Nous contacter</a>
-        <a href="https://ko-fi.com/brighterbuilds" target="_blank">
-          <button class="littlebutton">Ko-Fi</button>
-        </a>
-      </nav>
-    </header>
-    
-  <div id="assets-content" style="display:block;">
-    <section class="assets-section" style="padding-top:120px; min-height:100vh;">
-      <h1 class="section-title">Assets Brighter Builds</h1>
-      <div class="team-category">
-        <h2 class="section-title" style="margin-bottom:3rem;">Bannières</h2>
-        <div class="category-separator"></div>
-        <div class="media-list carousel" style="justify-content:center;align-items:center;">
-          <button class="carousel-btn prev">&#10094;</button>
-          <div class="carousel-track">
-            <img src="assets/banner/banner.png" alt="Bannière principale">
-            <img src="assets/banner/blackbanner.jpeg" alt="Bannière noire">
-            <img src="assets/banner/greenbanner.png" alt="Bannière verte">
-            <img src="assets/banner/redbanner.png" alt="Bannière rouge">
-            <img src="assets/banner/yellowbanner.png" alt="Bannière jaune">
-            <img src="assets/banner/bluebanner.png" alt="Bannière bleue">
-          </div>
-          <button class="carousel-btn next">&#10095;</button>
+  <header class="site-header">
+    <div class="logo">
+      <a href="index.html" aria-label="Retour à l'accueil Brighter Builds">
+        <img src="logo.png" alt="Logo Brighter Builds">
+        <span>Brighter Builds</span>
+      </a>
+    </div>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="projects.html">Projets</a>
+      <a href="team.html">Equipe</a>
+      <a href="recrutement.html">Recrutement</a>
+      <a href="reseaux.html">Réseaux</a>
+      <a href="https://discord.gg/8AsrS9Vtjt" target="_blank" rel="noopener">Nous contacter</a>
+      <a class="nav-kofi" href="https://ko-fi.com/brighterbuilds" target="_blank" rel="noopener">
+        <button class="littlebutton" type="button">Ko-Fi</button>
+      </a>
+    </nav>
+  </header>
+
+  <main id="assets-content">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Identité visuelle</p>
+        <h1>Kit de marque Brighter Builds</h1>
+        <p class="lead">Logos, bannières et palette de couleurs prêts à l'emploi pour représenter l'univers Brighter Builds dans vos communications.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#logos">Explorer les logos</a>
+          <a class="btn ghost" href="#palette">Palette de couleur</a>
         </div>
       </div>
-      <div class="team-category">
-        <h2 class="section-title" style="margin-bottom:3rem;">Logo</h2>
-        <div class="category-separator"></div>
-        <div class="media-list" style="display:flex;justify-content:center;align-items:center;">
-          <div class="logo-highlight" style="background:rgba(179,136,235,0.10);border-radius:2rem;padding:2.5rem 3rem;box-shadow:0 0 40px 10px #b388eb33;display:flex;justify-content:center;align-items:center;">
-            <img src="logo.png" alt="Logo Brighter Builds" style="max-width:180px;filter:drop-shadow(0 0 18px #b388eb88);">
-          </div>
+      <div class="hero-media" aria-hidden="true">
+        <div class="media-stacked-card media-banner">
+          <img src="assets/banner/banner.png" alt="">
         </div>
-      </div>
-      <div class="team-category">
-        <h2 class="section-title" style="margin-bottom:3rem;">Palette de couleur</h2>
-        <div class="category-separator"></div>
-        <div class="palette-list" style="display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-top:2.5rem;">
-          <div class="color-swatch main-color" data-color="#fdc5f5" style="background:#fdc5f5;border-radius:1.2rem;width:110px;height:110px;box-shadow:0 0 18px #fdc5f588;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:transform 0.25s, box-shadow 0.25s;animation:popIn 0.5s 0s both;">
-            <span style="color:#222;font-weight:bold;">#fdc5f5</span>
-            <button class="copy-btn" style="margin-top:0.5rem;font-size:0.9rem;padding:0.2rem 0.7rem;border-radius:1em;border:none;background:#fff;cursor:pointer;">Copier</button>
-          </div>
-          <div class="color-swatch main-color" data-color="#f7aef8" style="background:#f7aef8;border-radius:1.2rem;width:110px;height:110px;box-shadow:0 0 18px #f7aef888;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:transform 0.25s, box-shadow 0.25s;animation:popIn 0.5s 0.05s both;">
-            <span style="color:#222;font-weight:bold;">#f7aef8</span>
-            <button class="copy-btn" style="margin-top:0.5rem;font-size:0.9rem;padding:0.2rem 0.7rem;border-radius:1em;border:none;background:#fff;cursor:pointer;">Copier</button>
-          </div>
-          <div class="color-swatch" data-color="#d59bf2" style="background:#d59bf2;border-radius:1.2rem;width:110px;height:110px;box-shadow:0 0 18px #d59bf288;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:transform 0.25s, box-shadow 0.25s;animation:popIn 0.5s 0.1s both;">
-            <span style="color:#222;font-weight:bold;">#d59bf2</span>
-            <button class="copy-btn" style="margin-top:0.5rem;font-size:0.9rem;padding:0.2rem 0.7rem;border-radius:1em;border:none;background:#fff;cursor:pointer;">Copier</button>
-          </div>
-          <div class="color-swatch main-color" data-color="#b388eb" style="background:#b388eb;border-radius:1.2rem;width:110px;height:110px;box-shadow:0 0 18px #b388eb88;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:transform 0.25s, box-shadow 0.25s;animation:popIn 0.5s 0.15s both;">
-            <span style="color:#222;font-weight:bold;">#b388eb</span>
-            <button class="copy-btn" style="margin-top:0.5rem;font-size:0.9rem;padding:0.2rem 0.7rem;border-radius:1em;border:none;background:#fff;cursor:pointer;">Copier</button>
-          </div>
-          <div class="color-swatch" data-color="#9a8eee" style="background:#9a8eee;border-radius:1.2rem;width:110px;height:110px;box-shadow:0 0 18px #9a8eee88;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:transform 0.25s, box-shadow 0.25s;animation:popIn 0.5s 0.2s both;">
-            <span style="color:#222;font-weight:bold;">#9a8eee</span>
-            <button class="copy-btn" style="margin-top:0.5rem;font-size:0.9rem;padding:0.2rem 0.7rem;border-radius:1em;border:none;background:#fff;cursor:pointer;">Copier</button>
-          </div>
-          <div class="color-swatch main-color" data-color="#8093f1" style="background:#8093f1;border-radius:1.2rem;width:110px;height:110px;box-shadow:0 0 18px #8093f188;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:transform 0.25s, box-shadow 0.25s;animation:popIn 0.5s 0.25s both;">
-            <span style="color:#222;font-weight:bold;">#8093f1</span>
-            <button class="copy-btn" style="margin-top:0.5rem;font-size:0.9rem;padding:0.2rem 0.7rem;border-radius:1em;border:none;background:#fff;cursor:pointer;">Copier</button>
-          </div>
-          <div class="color-swatch" data-color="#79b8f4" style="background:#79b8f4;border-radius:1.2rem;width:110px;height:110px;box-shadow:0 0 18px #79b8f488;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:transform 0.25s, box-shadow 0.25s;animation:popIn 0.5s 0.3s both;">
-            <span style="color:#222;font-weight:bold;">#79b8f4</span>
-            <button class="copy-btn" style="margin-top:0.5rem;font-size:0.9rem;padding:0.2rem 0.7rem;border-radius:1em;border:none;background:#fff;cursor:pointer;">Copier</button>
-          </div>
-          <div class="color-swatch main-color" data-color="#72ddf7" style="background:#72ddf7;border-radius:1.2rem;width:110px;height:110px;box-shadow:0 0 18px #72ddf788;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:transform 0.25s, box-shadow 0.25s;animation:popIn 0.5s 0.35s both;">
-            <span style="color:#222;font-weight:bold;">#72ddf7</span>
-            <button class="copy-btn" style="margin-top:0.5rem;font-size:0.9rem;padding:0.2rem 0.7rem;border-radius:1em;border:none;background:#fff;cursor:pointer;">Copier</button>
-          </div>
+        <div class="media-stacked-card media-logo">
+          <img src="logo.png" alt="">
         </div>
       </div>
     </section>
-    <footer class="site-footer">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>Navigation</h3>
-          <nav class="footer-nav">
-            <a href="projects.html">Projets</a>
-            <a href="team.html">Equipe</a>
-            <a href="recrutement.html">Recrutement</a>
-            <a href="reseaux.html">Réseaux</a>
-            <a href="https://discord.gg/8AsrS9Vtjt" target="_blank">Nous contacter</a>
-          </nav>
+
+    <section class="brand-section" id="principes">
+      <div class="section-header">
+        <div>
+          <p class="eyebrow">Avant d'utiliser</p>
+          <h2>Principes clés</h2>
+          <p class="section-lead">Respectez ces bases pour préserver la cohérence et l'impact de notre identité visuelle.</p>
         </div>
-        <div class="footer-section">
-          <h3>Nous soutenir</h3>
-          <div class="kofi-button">
-            <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
-            <script type='text/javascript'>kofiwidget2.init('Soutenez nous !', '#b388eb', 'H2H71EL9VU');kofiwidget2.draw();</script>
+      </div>
+      <div class="info-grid">
+        <article class="guideline-card">
+          <span class="guideline-index">01</span>
+          <h3>Espace de respiration</h3>
+          <p>Maintenez un espace équivalent à la hauteur du logo tout autour. Évitez de coller le logo aux bords ou à d'autres éléments graphiques.</p>
+        </article>
+        <article class="guideline-card">
+          <span class="guideline-index">02</span>
+          <h3>Contrastes maîtrisés</h3>
+          <p>Privilégiez les fonds sombres ou très clairs. Si le fond est complexe, ajoutez un aplat ou une légère ombre portée pour assurer la lisibilité.</p>
+        </article>
+        <article class="guideline-card">
+          <span class="guideline-index">03</span>
+          <h3>Aucune altération</h3>
+          <p>N'étirez pas le logo, ne changez pas ses couleurs et ne modifiez pas son orientation. Utilisez les versions fournies telles quelles.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="brand-section" id="logos">
+      <div class="section-header">
+        <div>
+          <p class="eyebrow">Logos</p>
+          <h2>Symboles &amp; signatures</h2>
+          <p class="section-lead">Formats PNG haute définition avec fond transparent pour toutes les utilisations digitales.</p>
+        </div>
+        <div class="section-actions">
+          <a class="btn outline" href="logo.png" download>Télécharger le logo</a>
+        </div>
+      </div>
+      <div class="asset-grid logo-grid">
+        <figure class="asset-card dark-surface">
+          <div class="asset-preview">
+            <img src="logo.png" alt="Logo Brighter Builds sur fond sombre">
           </div>
+          <figcaption>
+            <h3>Logo principal</h3>
+            <p>À privilégier sur les fonds sombres ou photographiques.</p>
+          </figcaption>
+          <dl class="asset-meta">
+            <div>
+              <dt>Format</dt>
+              <dd>PNG transparent · 2000 px</dd>
+            </div>
+            <div>
+              <dt>Usage</dt>
+              <dd>Web, miniature, overlay vidéo</dd>
+            </div>
+          </dl>
+        </figure>
+        <figure class="asset-card light-surface">
+          <div class="asset-preview">
+            <img src="logo.png" alt="Logo Brighter Builds détourage clair">
+          </div>
+          <figcaption>
+            <h3>Version fond clair</h3>
+            <p>Utilisez un fond lavande clair pour soutenir le logo sur un aplat clair.</p>
+          </figcaption>
+          <dl class="asset-meta">
+            <div>
+              <dt>Astuce</dt>
+              <dd>Appliquez #fdc5f5 en arrière-plan</dd>
+            </div>
+            <div>
+              <dt>Usage</dt>
+              <dd>Documents internes, maquettes UI</dd>
+            </div>
+          </dl>
+        </figure>
+        <figure class="asset-card">
+          <div class="asset-preview">
+            <img src="assets/logo2.png" alt="Logo Brighter Builds sans arrière-plan">
+          </div>
+          <figcaption>
+            <h3>Logo sans arrière-plan</h3>
+            <p>Version découpée prête pour les compositions vidéo ou les mockups transparents.</p>
+          </figcaption>
+          <dl class="asset-meta">
+            <div>
+              <dt>Format</dt>
+              <dd>PNG · 2048 px</dd>
+            </div>
+            <div>
+              <dt>Usage</dt>
+              <dd>Montages, intégrations sur fond personnalisé</dd>
+            </div>
+          </dl>
+        </figure>
+      </div>
+    </section>
+
+    <section class="brand-section" id="logos-noel">
+      <div class="section-header">
+        <div>
+          <p class="eyebrow">Saison festive</p>
+          <h2>Logos de Noël</h2>
+          <p class="section-lead">Variations scintillantes pour habiller vos contenus durant les fêtes de fin d'année.</p>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>&copy; Brighter Builds 2025 - All Rights Reserved</p>
+      <div class="asset-grid">
+        <figure class="asset-card dark-surface">
+          <div class="asset-preview">
+            <img src="assets/christmas/assets/Brighter%20Christmas%20nobg.png" alt="Logo Brighter Builds Noël sans fond">
+          </div>
+          <figcaption>
+            <h3>Noël – sans fond</h3>
+            <p>Version lumineuse sans arrière-plan, idéale pour overlays ou stickers.</p>
+          </figcaption>
+          <dl class="asset-meta">
+            <div>
+              <dt>Format</dt>
+              <dd>PNG transparent · 2500 px</dd>
+            </div>
+            <div>
+              <dt>Usage</dt>
+              <dd>Badges, illustrations, animations</dd>
+            </div>
+          </dl>
+        </figure>
+        <figure class="asset-card dark-surface">
+          <div class="asset-preview">
+            <img src="assets/christmas/assets/Brighter%20Christmas.png" alt="Logo Brighter Builds Noël avec halo">
+          </div>
+          <figcaption>
+            <h3>Noël – halo rouge</h3>
+            <p>Ambiance chaleureuse avec candy canes, sapins et flocons rouges.</p>
+          </figcaption>
+          <dl class="asset-meta">
+            <div>
+              <dt>Ambiance</dt>
+              <dd>Fêtes traditionnelles</dd>
+            </div>
+            <div>
+              <dt>Usage</dt>
+              <dd>Bannières, annonces saisonnières</dd>
+            </div>
+          </dl>
+        </figure>
+        <figure class="asset-card dark-surface">
+          <div class="asset-preview">
+            <img src="assets/christmas/assets/Brighter%20Winter%201.png" alt="Logo Brighter Builds Noël variation hiver 1">
+          </div>
+          <figcaption>
+            <h3>Winter Glow</h3>
+            <p>Candy canes bleues et flocons glacés pour une tonalité polaire.</p>
+          </figcaption>
+          <dl class="asset-meta">
+            <div>
+              <dt>Palette</dt>
+              <dd>Bleus givrés</dd>
+            </div>
+            <div>
+              <dt>Usage</dt>
+              <dd>Posts réseau sociaux, invitations</dd>
+            </div>
+          </dl>
+        </figure>
+        <figure class="asset-card dark-surface">
+          <div class="asset-preview">
+            <img src="assets/christmas/assets/Brighter%20Winter%202.png" alt="Logo Brighter Builds Noël variation hiver 2">
+          </div>
+          <figcaption>
+            <h3>Winter Party</h3>
+            <p>Sapins multiples et flocons clairs pour vos visuels communautaires.</p>
+          </figcaption>
+          <dl class="asset-meta">
+            <div>
+              <dt>Palette</dt>
+              <dd>Bleus et verts lumineux</dd>
+            </div>
+            <div>
+              <dt>Usage</dt>
+              <dd>Miniatures, stories, visuels événementiels</dd>
+            </div>
+          </dl>
+        </figure>
+        <figure class="asset-card dark-surface">
+          <div class="asset-preview">
+            <img src="assets/christmas/assets/Brighter%20Winter%203.png" alt="Logo Brighter Builds Noël variation hiver 3">
+          </div>
+          <figcaption>
+            <h3>Winter Classic</h3>
+            <p>Version épurée avec halo bleu pour vos supports plus minimalistes.</p>
+          </figcaption>
+          <dl class="asset-meta">
+            <div>
+              <dt>Palette</dt>
+              <dd>Bleu glacier</dd>
+            </div>
+            <div>
+              <dt>Usage</dt>
+              <dd>Fond d'écran, overlays stream</dd>
+            </div>
+          </dl>
+        </figure>
       </div>
-    </footer>
-  </div>
+    </section>
+
+    <section class="brand-section" id="bannieres">
+      <div class="section-header">
+        <div>
+          <p class="eyebrow">Bannières</p>
+          <h2>Couvertures officielles</h2>
+          <p class="section-lead">Déclinaisons adaptées aux réseaux sociaux, miniatures YouTube et espaces communautaires.</p>
+        </div>
+        <div class="section-actions">
+          <a class="btn outline" href="assets/banner/banner.png" download>Télécharger la bannière principale</a>
+        </div>
+      </div>
+      <div class="carousel" data-component="carousel">
+        <button class="carousel-btn prev" type="button" aria-label="Bannière précédente">&#10094;</button>
+        <div class="carousel-track">
+          <img src="assets/banner/banner.png" alt="Bannière Brighter Builds fond violet" data-caption="Bannière signature">
+          <img src="assets/banner/blackbanner.jpeg" alt="Bannière Brighter Builds fond noir" data-caption="Variation sombre">
+          <img src="assets/banner/greenbanner.png" alt="Bannière Brighter Builds fond vert" data-caption="Accent vert">
+          <img src="assets/banner/redbanner.png" alt="Bannière Brighter Builds fond rouge" data-caption="Accent rouge">
+          <img src="assets/banner/yellowbanner.png" alt="Bannière Brighter Builds fond jaune" data-caption="Accent jaune">
+          <img src="assets/banner/bluebanner.png" alt="Bannière Brighter Builds fond bleu" data-caption="Accent bleu">
+        </div>
+        <button class="carousel-btn next" type="button" aria-label="Bannière suivante">&#10095;</button>
+      </div>
+      <p class="carousel-hint">Cliquez sur la bannière active pour l'ouvrir en plein écran. Les flèches permettent de parcourir les déclinaisons.</p>
+    </section>
+
+    <section class="brand-section" id="palette">
+      <div class="section-header">
+        <div>
+          <p class="eyebrow">Palette</p>
+          <h2>Couleurs officielles</h2>
+          <p class="section-lead">Copiez les codes hexadécimaux pour vos projets digitaux. Les couleurs marquées d'une étoile sont prioritaires.</p>
+        </div>
+      </div>
+      <div class="palette-grid">
+        <article class="color-swatch main-color" data-color="#fdc5f5" style="--swatch-color:#fdc5f5;">
+          <div class="color-chip"></div>
+          <div class="color-data">
+            <div class="color-labels">
+              <span class="color-token">#FDC5F5</span>
+              <span class="color-role">Accent clair</span>
+            </div>
+            <button class="copy-btn" type="button">Copier</button>
+          </div>
+        </article>
+        <article class="color-swatch main-color" data-color="#f7aef8" style="--swatch-color:#f7aef8;">
+          <div class="color-chip"></div>
+          <div class="color-data">
+            <div class="color-labels">
+              <span class="color-token">#F7AEF8</span>
+              <span class="color-role">Accent secondaire</span>
+            </div>
+            <button class="copy-btn" type="button">Copier</button>
+          </div>
+        </article>
+        <article class="color-swatch" data-color="#d59bf2" style="--swatch-color:#d59bf2;">
+          <div class="color-chip"></div>
+          <div class="color-data">
+            <div class="color-labels">
+              <span class="color-token">#D59BF2</span>
+              <span class="color-role">Dégradé</span>
+            </div>
+            <button class="copy-btn" type="button">Copier</button>
+          </div>
+        </article>
+        <article class="color-swatch main-color" data-color="#b388eb" style="--swatch-color:#b388eb;">
+          <div class="color-chip"></div>
+          <div class="color-data">
+            <div class="color-labels">
+              <span class="color-token">#B388EB</span>
+              <span class="color-role">Couleur marque</span>
+            </div>
+            <button class="copy-btn" type="button">Copier</button>
+          </div>
+        </article>
+        <article class="color-swatch" data-color="#9a8eee" style="--swatch-color:#9a8eee;">
+          <div class="color-chip"></div>
+          <div class="color-data">
+            <div class="color-labels">
+              <span class="color-token">#9A8EEE</span>
+              <span class="color-role">Dégradé</span>
+            </div>
+            <button class="copy-btn" type="button">Copier</button>
+          </div>
+        </article>
+        <article class="color-swatch main-color" data-color="#8093f1" style="--swatch-color:#8093f1;">
+          <div class="color-chip"></div>
+          <div class="color-data">
+            <div class="color-labels">
+              <span class="color-token">#8093F1</span>
+              <span class="color-role">Accent froid</span>
+            </div>
+            <button class="copy-btn" type="button">Copier</button>
+          </div>
+        </article>
+        <article class="color-swatch" data-color="#79b8f4" style="--swatch-color:#79b8f4;">
+          <div class="color-chip"></div>
+          <div class="color-data">
+            <div class="color-labels">
+              <span class="color-token">#79B8F4</span>
+              <span class="color-role">Dégradé</span>
+            </div>
+            <button class="copy-btn" type="button">Copier</button>
+          </div>
+        </article>
+        <article class="color-swatch main-color" data-color="#72ddf7" style="--swatch-color:#72ddf7;">
+          <div class="color-chip"></div>
+          <div class="color-data">
+            <div class="color-labels">
+              <span class="color-token">#72DDF7</span>
+              <span class="color-role">Highlight</span>
+            </div>
+            <button class="copy-btn" type="button">Copier</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="brand-section brand-section--compact" id="contact">
+      <div class="cta-panel">
+        <div>
+          <h2>Besoin d'un autre format&nbsp;?</h2>
+          <p style="color:#ffffff;">Contactez-nous pour obtenir des fichiers vectoriels, des déclinaisons monochromes ou des conseils d'utilisation personnalisés.</p>
+        </div>
+        <a class="btn primary" href="https://discord.gg/8AsrS9Vtjt" target="_blank" rel="noopener">Rejoindre le Discord</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Navigation</h3>
+        <nav class="footer-nav">
+          <a href="projects.html">Projets</a>
+          <a href="team.html">Equipe</a>
+          <a href="recrutement.html">Recrutement</a>
+          <a href="reseaux.html">Réseaux</a>
+          <a href="https://discord.gg/8AsrS9Vtjt" target="_blank" rel="noopener">Nous contacter</a>
+        </nav>
+      </div>
+      <div class="footer-section">
+        <h3>Nous soutenir</h3>
+        <div class="kofi-button">
+          <script type="text/javascript" src="https://storage.ko-fi.com/cdn/widget/Widget_2.js"></script>
+          <script type="text/javascript">kofiwidget2.init('Soutenez nous !', '#b388eb', 'H2H71EL9VU');kofiwidget2.draw();</script>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; Brighter Builds 2025 - All Rights Reserved</p>
+    </div>
+  </footer>
+
   <script src="js/assets.js"></script>
 </body>
 </html>
