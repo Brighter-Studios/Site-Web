@@ -4,28 +4,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kit de marque - Brighter Builds</title>
+  <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/assets.css">
   <link rel="shortcut icon" href="logo.png" type="image/png">
 </head>
 <body>
-  <header class="site-header">
-    <div class="logo">
-      <a href="index.html" aria-label="Retour à l'accueil Brighter Builds">
-        <img src="logo.png" alt="Logo Brighter Builds">
-        <span>Brighter Builds</span>
-      </a>
+  <header class="bb-navbar" data-navbar>
+    <span class="bb-navbar__scrim" data-navbar-scrim></span>
+    <div class="bb-navbar__shell">
+      <div class="bb-navbar__inner">
+        <a class="bb-navbar__brand" href="index.html" aria-label="Retour à l'accueil Brighter Builds">
+          <img src="logo.png" alt="Logo Brighter Builds">
+          <span>Brighter Builds</span>
+        </a>
+
+        <button class="bb-navbar__toggle" type="button" data-navbar-toggle aria-controls="bb-navbar-menu" aria-expanded="false">
+          <span class="sr-only">Afficher le menu</span>
+          <span></span>
+        </button>
+
+        <nav class="bb-navbar__menu" id="bb-navbar-menu" data-navbar-menu aria-label="Navigation principale">
+          <a class="bb-navbar__link" href="projects.html">Projets</a>
+          <a class="bb-navbar__link" href="team.html">Equipe</a>
+          <a class="bb-navbar__link" href="recrutement.html">Recrutement</a>
+          <a class="bb-navbar__link" href="reseaux.html">Réseaux</a>
+          <a class="bb-navbar__link" href="assets.html" aria-current="page">Assets</a>
+          <a class="copy-btn" href="https://discord.gg/8AsrS9Vtjt" target="_blank" rel="noopener">Discord</a>
+        </nav>
+      </div>
     </div>
-    <nav class="nav" aria-label="Navigation principale">
-      <a href="projects.html">Projets</a>
-      <a href="team.html">Equipe</a>
-      <a href="recrutement.html">Recrutement</a>
-      <a href="reseaux.html">Réseaux</a>
-      <a href="https://discord.gg/8AsrS9Vtjt" target="_blank" rel="noopener">Nous contacter</a>
-      <a class="nav-kofi" href="https://ko-fi.com/brighterbuilds" target="_blank" rel="noopener">
-        <button class="littlebutton" type="button">Ko-Fi</button>
-      </a>
-    </nav>
   </header>
 
   <main id="assets-content">
@@ -437,7 +445,7 @@
       </div>
       <div class="footer-section">
         <h3>Nous soutenir</h3>
-        <div class="kofi-button">
+        <div class="kofi-widget">
           <script type="text/javascript" src="https://storage.ko-fi.com/cdn/widget/Widget_2.js"></script>
           <script type="text/javascript">kofiwidget2.init('Soutenez nous !', '#b388eb', 'H2H71EL9VU');kofiwidget2.draw();</script>
         </div>
@@ -448,6 +456,7 @@
     </div>
   </footer>
 
+  <script src="js/navbar.js" defer></script>
   <script src="js/assets.js"></script>
 </body>
 </html>

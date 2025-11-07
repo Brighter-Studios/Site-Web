@@ -1099,13 +1099,88 @@ canvas {
     font-size: 0.85rem;
 }
 
-.kofi-button {
-    margin-top: 1rem;
-    transition: transform 0.3s ease;
+.kofi-widget {
+  margin-top: 1.5rem;
 }
 
-.kofi-button:hover {
-    transform: translateY(-2px);
+.kofi-widget .btn-container {
+  display: inline-flex !important;
+  background: none !important;
+  box-shadow: none !important;
+  min-width: auto !important;
+  white-space: normal !important;
+}
+
+.kofi-widget .kofi-button {
+  position: relative;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.85rem 2.2rem !important;
+  border-radius: 18px !important;
+  font-weight: 700 !important;
+  font-size: 0.94rem !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: #ffffff !important;
+  background: linear-gradient(135deg, rgba(128, 147, 241, 0.22), rgba(179, 136, 235, 0.6)) !important;
+  border: 1px solid transparent !important;
+  box-shadow: 0 28px 58px rgba(122, 96, 255, 0.45) !important;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, background 0.35s ease, color 0.35s ease, letter-spacing 0.35s ease !important;
+  text-decoration: none !important;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.kofi-widget .kofi-button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 25% 0%, rgba(255, 255, 255, 0.28), transparent 50%), radial-gradient(circle at 80% 120%, rgba(114, 221, 247, 0.4), transparent 55%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.kofi-widget .kofi-button:hover,
+.kofi-widget .kofi-button:focus-visible {
+  transform: translateY(-6px);
+  background: linear-gradient(135deg, rgba(128, 147, 241, 0.4), rgba(247, 174, 248, 0.75)) !important;
+  box-shadow: 0 34px 70px rgba(128, 110, 255, 0.6) !important;
+  border-color: rgba(179, 136, 235, 0.55) !important;
+  color: #ffffff !important;
+}
+
+.kofi-widget .kofi-button:hover::after,
+.kofi-widget .kofi-button:focus-visible::after {
+  opacity: 1;
+}
+
+.kofi-widget .kofi-button:focus-visible {
+  outline: 3px solid rgba(114, 221, 247, 0.65);
+  outline-offset: 4px;
+}
+
+.kofi-widget .kofi-button:active {
+  transform: translateY(-2px);
+  box-shadow: 0 24px 56px rgba(128, 110, 255, 0.5) !important;
+}
+
+.kofi-widget .kofitext {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.45rem;
+  font-weight: inherit !important;
+  letter-spacing: inherit !important;
+  color: inherit !important;
+}
+
+.kofi-widget .kofiimg {
+  height: 20px !important;
+  width: 24px !important;
+  margin: 0 !important;
+  filter: drop-shadow(0 6px 16px rgba(114, 221, 247, 0.45));
 }
 
 @media (max-width: 768px) {
