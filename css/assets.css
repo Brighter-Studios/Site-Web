@@ -446,7 +446,7 @@ a {
 }
 
 .light-surface .asset-preview {
-  background: linear-gradient(140deg, rgba(253, 197, 245, 0.92), rgba(247, 174, 248, 0.88));
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.88));
 }
 
 .asset-card h3 {
