@@ -1,0 +1,9 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+    color: white;
+    font-family: 'JetBrains Mono', monospace;
+    height: 100%;
+}
