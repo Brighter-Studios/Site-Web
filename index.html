@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Brighter Builds</title>
   <link rel="stylesheet" href="css\style.css">
+  <link rel="stylesheet" href="css\navbar.css">
   <link rel="shortcut icon" href="logo.png" type="image/png">
   <meta property="og:title" content="Brighter Builds">
   <meta property="og:description" content="On build, vous jouez. Et tout ça gratuitement">
@@ -30,20 +31,32 @@
 </head>
 
 <body>
-  <header class="site-header">
-    <div class="logo">
-      <a href="index.html">
-        <img src="logo.png" alt="Logo Brighter Builds">
-        <span>Brighter Builds</span>
-      </a>
+  <header class="bb-navbar" data-navbar>
+    <span class="bb-navbar__scrim" data-navbar-scrim></span>
+    <div class="bb-navbar__shell">
+      <div class="bb-navbar__inner">
+        <a class="bb-navbar__brand" href="index.html" aria-label="Retour à l'accueil Brighter Builds">
+          <img src="logo.png" alt="Logo Brighter Builds">
+          <span>Brighter Builds</span>
+        </a>
+
+        <button class="bb-navbar__toggle" type="button" data-navbar-toggle aria-controls="bb-navbar-menu"
+          aria-expanded="false">
+          <span class="sr-only">Afficher le menu</span>
+          <span></span>
+        </button>
+
+        <nav class="bb-navbar__menu" id="bb-navbar-menu" data-navbar-menu aria-label="Navigation principale">
+          <a class="bb-navbar__link" href="projects.html">Projets</a>
+          <a class="bb-navbar__link" href="team.html">Equipe</a>
+          <a class="bb-navbar__link" href="recrutement.html">Recrutement</a>
+          <a class="bb-navbar__link" href="reseaux.html">Réseaux</a>
+          <a class="copy-btn" href="https://discord.gg/8AsrS9Vtjt" target="_blank" rel="noopener">Discord</a>
+        </nav>
+      </div>
     </div>
-    <nav class="nav">
-      <a href="teamold.html">Equipe</a>
-      <a href="recrutement.html">Recrutement</a>
-      <a href="reseaux.html">Réseaux</a>
-      <a href="https://discord.gg/8AsrS9Vtjt" target="_blank">Nous contacter</a>
-    </nav>
   </header>
+
 
   <section class="hero">
     <div class="stars"></div>
@@ -73,62 +86,57 @@
         </div>
       </div>
     </div>
-  </section>
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Navigation</h3>
+          <nav class="footer-nav">
+            <a href="projects.html">Projets</a>
+            <a href="team.html">Equipe</a>
+            <a href="recrutement.html">Recrutement</a>
+            <a href="reseaux.html">Réseaux</a>
+            <a href="https://discord.gg/8AsrS9Vtjt" target="_blank">Nous contacter</a>
+          </nav>
+        </div>
 
-  <section class="projects-section" data-scroll-section>
-
-  </section>
-
-  <footer class="site-footer">
-    <div class="footer-content">
-      <div class="footer-section">
-        <h3>Navigation</h3>
-        <nav class="footer-nav">
-          <a href="projects.html">Projets</a>
-          <a href="team.html">Equipe</a>
-          <a href="recrutement.html">Recrutement</a>
-          <a href="reseaux.html">Réseaux</a>
-          <a href="https://discord.gg/8AsrS9Vtjt" target="_blank">Nous contacter</a>
-        </nav>
-      </div>
-
-      <div class="footer-section">
-        <h3>Nous soutenir</h3>
-        <div class="kofi-widget">
-          <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
-          <script
-            type='text/javascript'>kofiwidget2.init('Soutenez nous !', '#b388eb', 'H2H71EL9VU'); kofiwidget2.draw();</script>
+        <div class="footer-section">
+          <h3>Nous soutenir</h3>
+          <div class="kofi-widget">
+            <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
+            <script
+              type='text/javascript'>kofiwidget2.init('Soutenez nous !', '#b388eb', 'H2H71EL9VU'); kofiwidget2.draw();</script>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="footer-bottom">
-      <p>&copy; Brighter Builds 2025 - All Rights Reserved</p>
-    </div>
-  </footer>
+      <div class="footer-bottom">
+        <p>&copy; Brighter Builds 2025 - All Rights Reserved</p>
+      </div>
+    </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  <script src="js/script.js"></script>
-  <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
-  <script>
-    kofiWidgetOverlay.draw('brighterbuilds', {
-      'type': 'floating-chat',
-      'floating-chat.donateButton.text': 'Support Us',
-      'floating-chat.donateButton.background-color': '#794bc4',
-      'floating-chat.donateButton.text-color': '#fff'
-    });
-  </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+    <script>
+      kofiWidgetOverlay.draw('brighterbuilds', {
+        'type': 'floating-chat',
+        'floating-chat.donateButton.text': 'Support Us',
+        'floating-chat.donateButton.background-color': '#794bc4',
+        'floating-chat.donateButton.text-color': '#fff'
+      });
+    </script>
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-J06ZLXGMQJ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J06ZLXGMQJ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
 
-    gtag('config', 'G-J06ZLXGMQJ');
-  </script>
+      gtag('config', 'G-J06ZLXGMQJ');
+    </script>
 
 </body>
 
