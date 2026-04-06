@@ -1,63 +1,102 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-    <script src="js/CV.js"></script>
-    <script src="js/script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Jimbo - The Original Joker</title>
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="css/CV.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/navbar.css">
-    <meta charset="utf-32">
+    
+    <!-- Meta -->
+    <meta property="og:title" content="Jimbo CV">
+    <meta property="og:description" content="The Original Joker's Resume">
+    
+    <!-- Icons -->
     <link rel="shortcut icon" href="logo.png" type="image/png">
-    <title>CV netanyaou</title>
-    <meta property="og:title" content="CV netanyaou">
-    <meta property="og:description" content="Admin is speaking">
-    <meta property="og:image" content="https://www.brighter-builds.cc/assets/banner.png">
-    <meta property="og:url" content="https://www.brighter-builds.cc/">
-    <meta property="og:type" content="website">
 </head>
-
-<header class="bb-navbar" data-navbar>
-    <span class="bb-navbar__scrim" data-navbar-scrim></span>
-    <div class="bb-navbar__shell">
-        <div class="bb-navbar__inner">
-            <a class="bb-navbar__brand" href="index.html" aria-label="Retour à l'accueil Brighter Builds">
-                <img src="logo.png" alt="Logo Brighter Builds">
-                <span>Brighter Builds</span>
-            </a>
-
-            <button class="bb-navbar__toggle" type="button" data-navbar-toggle aria-controls="bb-navbar-menu"
-                aria-expanded="false">
-                <span class="sr-only">Afficher le menu</span>
-                <span></span>
-            </button>
-
-            <nav class="bb-navbar__menu" id="bb-navbar-menu" data-navbar-menu aria-label="Navigation principale">
-                <a class="bb-navbar__link" href="projects.html">Projets</a>
-                <a class="bb-navbar__link" href="team.html">Equipe</a>
-                <a class="bb-navbar__link" href="recrutement.html">Recrutement</a>
-                <a class="bb-navbar__link" href="reseaux.html">Réseaux</a>
-                <a class="copy-btn" href="https://discord.gg/8AsrS9Vtjt" target="_blank" rel="noopener">Discord</a>
-            </nav>
-        </div>
-    </div>
-</header>
-
 <body>
-    <h1>CV ISRAEL</h1>
-    <p>L'administrateur est entrain de parler</p>
-    <h2>Vive netanyaou notre grand administrateur suprème</h2>
+
+    <!-- 1. Balatro Background WebGL Canvas -->
+    <div id="canvas-container">
+        <canvas id="balatro-bg"></canvas>
+    </div>
+
+    <!-- 2. CRT Scanlines & Flicker Overlay -->
+    <div class="crt-overlay"></div>
+
+    <!-- 3. Screen Container for Turn-On Animation -->
+    <div class="screen-container">
+        
+        <!-- 4. Main CV Wrapper -->
+        <main class="cv-wrapper">
+            
+            <!-- Left Column: Picture & Stats -->
+            <div class="left-col">
+                <div class="card-container">
+                    <!-- Default to .webp, flips to .gif on click -->
+                    <img src="assets/CV/jimbo.webp" id="jimbo-card" class="joker-card" alt="Jimbo Joker Card" title="Click me!">
+                </div>
+                
+                <div class="title-group">
+                    <h1 class="joker-title">Jimbo</h1>
+                    <p class="joker-subtitle">"The Original"</p>
+                </div>
+
+                <div class="stats">
+                    <div class="stat-box">
+                        <span class="stat-label">Mult</span>
+                        <span class="stat-value mult">+4</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">Chips</span>
+                        <span class="stat-value chips">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Text content -->
+            <div class="right-col">
+                
+                <section class="section">
+                    <h2>Experience</h2>
+                    
+                    <div class="exp-item">
+                        <h3>Primary Carry Foundation</h3>
+                        <span class="date">Ante 1 - 3</span>
+                        <p>Provided the essential base multiplier required for early game runs to survive. Carried new and veteran players alike through the initial blind scaling curves with total reliability and an unbreaking smile.</p>
+                    </div>
+
+                    <div class="exp-item">
+                        <h3>Tutorial Mascot</h3>
+                        <span class="date">Lifelong</span>
+                        <p>Acted as the ultimate introduction to Joker synergies. The first friendly face everyone plays, perfectly explaining how flat Multiplier additions can redefine scoring mathematics.</p>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2>Skills & Buffs</h2>
+                    <ul class="skills-list">
+                        <li>Early Game Scaling</li>
+                        <li>Base Mult Addition</li>
+                        <li>Non-stop Smiling</li>
+                        <li>Common Rarity Efficiency</li>
+                        <li>Psychological Comfort</li>
+                    </ul>
+                </section>
+
+                <section class="section">
+                    <h2>Summary</h2>
+                    <p class="about-text">
+                        I might be basic, and I often get sold by Ante 4 for a Polychrome Blueprint, but I am the one who gets you off the ground. When your chips are low and the boss blind is looming, I add the +4 you desperately need. Always available in the shop, always ready to carry.
+                    </p>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- JS -->
+    <script src="js/CV.js"></script>
 </body>
-
-
-<script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
-<script>
-    kofiWidgetOverlay.draw('brighterbuilds', {
-        'type': 'floating-chat',
-        'floating-chat.donateButton.text': 'Support Us',
-        'floating-chat.donateButton.background-color': '#794bc4',
-        'floating-chat.donateButton.text-color': '#fff'
-    });
-</script>
-
 </html>
