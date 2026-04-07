@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 150);
     });
 
-    // 2. WebGL Background (React-Bits Balatro recreation)
+    // 2. WebGL Background (Balatro recreation - based on user's React code)
     const initBalatroBg = () => {
         const canvas = document.getElementById('balatro-bg');
         if (!canvas) return;
@@ -22,106 +22,116 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Config variables derived from the requested react-bits component props
         const config = {
             spinRotation: -2.0,
             spinSpeed: 7.0,
-            color1: [222/255, 68/255, 59/255],  // #DE443B
-            color2: [0/255, 107/255, 180/255],  // #006BB4
-            color3: [22/255, 35/255, 37/255],   // #162325
+            offset: [0.0, 0.0],
+            color1: '#DE443B',
+            color2: '#006BB4',
+            color3: '#162325',
             contrast: 3.5,
             lighting: 0.4,
             spinAmount: 0.25,
-            pixelFilter: 700.0
+            pixelFilter: 745.0,
+            spinEase: 1.0,
+            isRotate: false,
+            mouseInteraction: true
         };
 
+        function hexToVec4(hex) {
+            let hexStr = hex.replace('#', '');
+            let r = 0, g = 0, b = 0, a = 1;
+            if (hexStr.length === 6) {
+                r = parseInt(hexStr.slice(0, 2), 16) / 255;
+                g = parseInt(hexStr.slice(2, 4), 16) / 255;
+                b = parseInt(hexStr.slice(4, 6), 16) / 255;
+            } else if (hexStr.length === 8) {
+                r = parseInt(hexStr.slice(0, 2), 16) / 255;
+                g = parseInt(hexStr.slice(2, 4), 16) / 255;
+                b = parseInt(hexStr.slice(4, 6), 16) / 255;
+                a = parseInt(hexStr.slice(6, 8), 16) / 255;
+            }
+            return [r, g, b, a];
+        }
+
         const vertexShaderSource = `
-            attribute vec2 a_position;
-            varying vec2 v_uv;
+            attribute vec2 position;
+            varying vec2 vUv;
             void main() {
-                v_uv = a_position * 0.5 + 0.5;
-                gl_Position = vec4(a_position, 0.0, 1.0);
+                vUv = position * 0.5 + 0.5;
+                gl_Position = vec4(position, 0.0, 1.0);
             }
         `;
 
         const fragmentShaderSource = `
             precision highp float;
-            varying vec2 v_uv;
-            uniform vec2 iResolution;
-            uniform float iTime;
-            uniform vec3 color1;
-            uniform vec3 color2;
-            uniform vec3 color3;
-            uniform float spinRotation;
-            uniform float spinSpeed;
-            uniform float contrast;
-            uniform float lighting;
-            uniform float spinAmount;
-            uniform float pixelFilter;
 
-            float random(in vec2 st) {
-                return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
-            }
-            float noise(in vec2 st) {
-                vec2 i = floor(st);
-                vec2 f = fract(st);
-                float a = random(i);
-                float b = random(i + vec2(1.0, 0.0));
-                float c = random(i + vec2(0.0, 1.0));
-                float d = random(i + vec2(1.0, 1.0));
-                vec2 u = f*f*(3.0-2.0*f);
-                return mix(a, b, u.x) + (c - a)* u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
-            }
-            float fbm(in vec2 st) {
-                float value = 0.0;
-                float amplitude = 0.5;
-                for (int i = 0; i < 4; i++) {
-                    value += amplitude * noise(st);
-                    st *= 2.0;
-                    amplitude *= 0.5;
+            #define PI 3.14159265359
+
+            uniform float iTime;
+            uniform vec3 iResolution;
+            uniform float uSpinRotation;
+            uniform float uSpinSpeed;
+            uniform vec2 uOffset;
+            uniform vec4 uColor1;
+            uniform vec4 uColor2;
+            uniform vec4 uColor3;
+            uniform float uContrast;
+            uniform float uLighting;
+            uniform float uSpinAmount;
+            uniform float uPixelFilter;
+            uniform float uSpinEase;
+            uniform bool uIsRotate;
+            uniform vec2 uMouse;
+
+            varying vec2 vUv;
+
+            vec4 effect(vec2 screenSize, vec2 screen_coords) {
+                float pixel_size = length(screenSize.xy) / uPixelFilter;
+                vec2 uv = (floor(screen_coords.xy * (1.0 / pixel_size)) * pixel_size - 0.5 * screenSize.xy) / length(screenSize.xy) - uOffset;
+                float uv_len = length(uv);
+                
+                float speed = (uSpinRotation * uSpinEase * 0.2);
+                if(uIsRotate){
+                   speed = iTime * speed;
                 }
-                return value;
+                speed += 302.2;
+                
+                float mouseInfluence = (uMouse.x * 2.0 - 1.0);
+                speed += mouseInfluence * 0.1;
+                
+                float new_pixel_angle = atan(uv.y, uv.x) + speed - uSpinEase * 20.0 * (uSpinAmount * uv_len + (1.0 - uSpinAmount));
+                vec2 mid = (screenSize.xy / length(screenSize.xy)) / 2.0;
+                uv = (vec2(uv_len * cos(new_pixel_angle) + mid.x, uv_len * sin(new_pixel_angle) + mid.y) - mid);
+                
+                uv *= 30.0;
+                float baseSpeed = iTime * uSpinSpeed;
+                speed = baseSpeed + mouseInfluence * 2.0;
+                
+                vec2 uv2 = vec2(uv.x + uv.y);
+                
+                for(int i = 0; i < 5; i++) {
+                    uv2 += sin(max(uv.x, uv.y)) + uv;
+                    uv += 0.5 * vec2(
+                        cos(5.1123314 + 0.353 * uv2.y + speed * 0.131121),
+                        sin(uv2.x - 0.113 * speed)
+                    );
+                    uv -= cos(uv.x + uv.y) - sin(uv.x * 0.711 - uv.y);
+                }
+                
+                float contrast_mod = (0.25 * uContrast + 0.5 * uSpinAmount + 1.2);
+                float paint_res = min(2.0, max(0.0, length(uv) * 0.035 * contrast_mod));
+                float c1p = max(0.0, 1.0 - contrast_mod * abs(1.0 - paint_res));
+                float c2p = max(0.0, 1.0 - contrast_mod * abs(paint_res));
+                float c3p = 1.0 - min(1.0, c1p + c2p);
+                float light = (uLighting - 0.2) * max(c1p * 5.0 - 4.0, 0.0) + uLighting * max(c2p * 5.0 - 4.0, 0.0);
+                
+                return (0.3 / uContrast) * uColor1 + (1.0 - 0.3 / uContrast) * (uColor1 * c1p + uColor2 * c2p + vec4(c3p * uColor3.rgb, c3p * uColor1.a)) + light;
             }
 
             void main() {
-                vec2 uv = gl_FragCoord.xy / iResolution.xy;
-                if (pixelFilter > 0.0) {
-                    vec2 res = vec2(pixelFilter, pixelFilter * (iResolution.y / iResolution.x));
-                    uv = floor(uv * res) / res;
-                }
-                
-                vec2 p = uv * 2.0 - 1.0;
-                p.x *= iResolution.x / iResolution.y;
-
-                float t = iTime * spinSpeed * 0.1;
-
-                float c = cos(spinRotation);
-                float s = sin(spinRotation);
-                mat2 rot = mat2(c, -s, s, c);
-                p = rot * p;
-
-                vec2 q = vec2(0.0);
-                q.x = fbm(p + t * 0.3);
-                q.y = fbm(p + vec2(1.0) + t * 0.2);
-
-                vec2 r = vec2(0.0);
-                r.x = fbm(p + 1.0 * q + vec2(1.7, 9.2) + t * 0.15);
-                r.y = fbm(p + 1.0 * q + vec2(8.3, 2.8) + t * 0.126);
-
-                float f = fbm(p + r * spinAmount);
-
-                vec3 col = color2;
-                col = mix(col, color1, clamp((f * f) * 1.5, 0.0, 1.0));
-
-                col = (col - 0.5) * contrast + 0.5;
-                col = clamp(col, 0.0, 1.0);
-
-                float rLen = length(q);
-                col = mix(col, color3, clamp(rLen * 0.5 - 0.1, 0.0, 1.0));
-
-                col += lighting * r.x * 0.5;
-
-                gl_FragColor = vec4(clamp(col, 0.0, 1.0), 1.0);
+                vec2 uv = vUv * iResolution.xy;
+                gl_FragColor = effect(iResolution.xy, uv);
             }
         `;
 
@@ -130,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
             gl.shaderSource(shader, source);
             gl.compileShader(shader);
             if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-                console.error(gl.getShaderInfoLog(shader));
+                console.error("Shader compilation failed:", gl.getShaderInfoLog(shader));
                 gl.deleteShader(shader);
                 return null;
             }
@@ -139,6 +149,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const vertexShader = compileShader(gl.VERTEX_SHADER, vertexShaderSource);
         const fragmentShader = compileShader(gl.FRAGMENT_SHADER, fragmentShaderSource);
+
+        if (!vertexShader || !fragmentShader) return;
 
         const program = gl.createProgram();
         gl.attachShader(program, vertexShader);
@@ -153,23 +165,35 @@ document.addEventListener('DOMContentLoaded', () => {
         ];
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
 
-        const positionLocation = gl.getAttribLocation(program, "a_position");
+        const positionLocation = gl.getAttribLocation(program, "position");
         gl.enableVertexAttribArray(positionLocation);
         gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
 
         const locs = {
             iResolution: gl.getUniformLocation(program, "iResolution"),
             iTime: gl.getUniformLocation(program, "iTime"),
-            color1: gl.getUniformLocation(program, "color1"),
-            color2: gl.getUniformLocation(program, "color2"),
-            color3: gl.getUniformLocation(program, "color3"),
-            spinRotation: gl.getUniformLocation(program, "spinRotation"),
-            spinSpeed: gl.getUniformLocation(program, "spinSpeed"),
-            contrast: gl.getUniformLocation(program, "contrast"),
-            lighting: gl.getUniformLocation(program, "lighting"),
-            spinAmount: gl.getUniformLocation(program, "spinAmount"),
-            pixelFilter: gl.getUniformLocation(program, "pixelFilter"),
+            uSpinRotation: gl.getUniformLocation(program, "uSpinRotation"),
+            uSpinSpeed: gl.getUniformLocation(program, "uSpinSpeed"),
+            uOffset: gl.getUniformLocation(program, "uOffset"),
+            uColor1: gl.getUniformLocation(program, "uColor1"),
+            uColor2: gl.getUniformLocation(program, "uColor2"),
+            uColor3: gl.getUniformLocation(program, "uColor3"),
+            uContrast: gl.getUniformLocation(program, "uContrast"),
+            uLighting: gl.getUniformLocation(program, "uLighting"),
+            uSpinAmount: gl.getUniformLocation(program, "uSpinAmount"),
+            uPixelFilter: gl.getUniformLocation(program, "uPixelFilter"),
+            uSpinEase: gl.getUniformLocation(program, "uSpinEase"),
+            uIsRotate: gl.getUniformLocation(program, "uIsRotate"),
+            uMouse: gl.getUniformLocation(program, "uMouse"),
         };
+
+        let mousePos = [0.5, 0.5];
+        if (config.mouseInteraction) {
+            window.addEventListener('mousemove', (e) => {
+                mousePos[0] = e.clientX / window.innerWidth;
+                mousePos[1] = 1.0 - (e.clientY / window.innerHeight);
+            });
+        }
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -181,21 +205,29 @@ document.addEventListener('DOMContentLoaded', () => {
         resizeCanvas();
 
         let startTime = performance.now();
+        
+        const c1 = hexToVec4(config.color1);
+        const c2 = hexToVec4(config.color2);
+        const c3 = hexToVec4(config.color3);
 
         function render(time) {
             gl.useProgram(program);
 
-            gl.uniform2f(locs.iResolution, canvas.width, canvas.height);
+            gl.uniform3f(locs.iResolution, canvas.width, canvas.height, canvas.width / canvas.height);
             gl.uniform1f(locs.iTime, (time - startTime) / 1000.0);
-            gl.uniform3f(locs.color1, config.color1[0], config.color1[1], config.color1[2]);
-            gl.uniform3f(locs.color2, config.color2[0], config.color2[1], config.color2[2]);
-            gl.uniform3f(locs.color3, config.color3[0], config.color3[1], config.color3[2]);
-            gl.uniform1f(locs.spinRotation, config.spinRotation);
-            gl.uniform1f(locs.spinSpeed, config.spinSpeed);
-            gl.uniform1f(locs.contrast, config.contrast);
-            gl.uniform1f(locs.lighting, config.lighting);
-            gl.uniform1f(locs.spinAmount, config.spinAmount);
-            gl.uniform1f(locs.pixelFilter, config.pixelFilter);
+            gl.uniform1f(locs.uSpinRotation, config.spinRotation);
+            gl.uniform1f(locs.uSpinSpeed, config.spinSpeed);
+            gl.uniform2f(locs.uOffset, config.offset[0], config.offset[1]);
+            gl.uniform4f(locs.uColor1, c1[0], c1[1], c1[2], c1[3]);
+            gl.uniform4f(locs.uColor2, c2[0], c2[1], c2[2], c2[3]);
+            gl.uniform4f(locs.uColor3, c3[0], c3[1], c3[2], c3[3]);
+            gl.uniform1f(locs.uContrast, config.contrast);
+            gl.uniform1f(locs.uLighting, config.lighting);
+            gl.uniform1f(locs.uSpinAmount, config.spinAmount);
+            gl.uniform1f(locs.uPixelFilter, config.pixelFilter);
+            gl.uniform1f(locs.uSpinEase, config.spinEase);
+            gl.uniform1i(locs.uIsRotate, config.isRotate ? 1 : 0);
+            gl.uniform2f(locs.uMouse, mousePos[0], mousePos[1]);
 
             gl.drawArrays(gl.TRIANGLES, 0, 6);
             requestAnimationFrame(render);
