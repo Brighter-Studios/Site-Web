@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Interactive Image Toggling
+    // toggle jimbo
     const jimboCard = document.getElementById('jimbo-card');
     let isGif = false;
 
@@ -8,11 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
         jimboCard.style.transform = 'scale(0.9)';
         setTimeout(() => {
             jimboCard.src = isGif ? 'assets/CV/balatro-jimbo.gif' : 'assets/CV/jimbo.webp';
-            jimboCard.style.transform = ''; // reset to let hover take over
+            jimboCard.style.transform = '';
         }, 150);
     });
 
-    // 2. WebGL Background (Balatro recreation - based on user's React code)
+    // balatro background
     const initBalatroBg = () => {
         const canvas = document.getElementById('balatro-bg');
         if (!canvas) return;
@@ -160,8 +160,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const positionBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
         const positions = [
-            -1.0, -1.0,  1.0, -1.0, -1.0,  1.0,
-            -1.0,  1.0,  1.0, -1.0,  1.0,  1.0,
+            -1.0, -1.0, 1.0, -1.0, -1.0, 1.0,
+            -1.0, 1.0, 1.0, -1.0, 1.0, 1.0,
         ];
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
 
@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
         resizeCanvas();
 
         let startTime = performance.now();
-        
+
         const c1 = hexToVec4(config.color1);
         const c2 = hexToVec4(config.color2);
         const c3 = hexToVec4(config.color3);
@@ -232,7 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
             gl.drawArrays(gl.TRIANGLES, 0, 6);
             requestAnimationFrame(render);
         }
-        
+
         requestAnimationFrame(render);
     };
 

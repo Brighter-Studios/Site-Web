@@ -1,7 +1,4 @@
-// Effets d'animation et de background pour la page réseaux
-
 document.addEventListener('DOMContentLoaded', () => {
-  // Animation d'apparition du bloc central
   const heroContent = document.querySelector('.hero-content');
   if (heroContent) {
     setTimeout(() => {
@@ -9,7 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 200);
   }
 
-  // Parallaxe sur les flares et l'espace
   document.addEventListener('mousemove', (e) => {
     const space = document.querySelector('.space');
     const flares = document.querySelectorAll('.flare');
@@ -24,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Animation des flares
   const flares = document.querySelectorAll('.flare');
   flares.forEach((flare, index) => {
     const delay = index * 0.5;

@@ -14,7 +14,6 @@ class ClickSpark {
         this.startTime = null;
         this.animationId = null;
 
-        // Bind the methods to maintain correct 'this' context
         this.handleClick = this.handleClick.bind(this);
         this.draw = this.draw.bind(this);
         this.resizeCanvas = this.resizeCanvas.bind(this);
@@ -58,7 +57,7 @@ class ClickSpark {
             case 'ease-in-out':
                 return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
             default:
-                return t * (2 - t); // ease-out
+                return t * (2 - t);
         }
     }
 
@@ -95,7 +94,6 @@ class ClickSpark {
         if (this.sparks.length > 0) {
             this.animationId = requestAnimationFrame(this.draw);
         } else {
-            // Important: Reset animationId when there are no more sparks
             this.animationId = null;
         }
     }
@@ -114,7 +112,6 @@ class ClickSpark {
 
         this.sparks.push(...newSparks);
 
-        // Start the animation if it's not already running
         if (!this.animationId) {
             this.animationId = requestAnimationFrame(this.draw);
         }
@@ -130,10 +127,9 @@ class ClickSpark {
     }
 }
 
-// Initialize the click spark effect
 document.addEventListener('DOMContentLoaded', () => {
     new ClickSpark({
-        sparkColor: '#ffffffff', 
+        sparkColor: '#ffffffff',
         sparkSize: 12,
         sparkRadius: 20,
         sparkCount: 10,

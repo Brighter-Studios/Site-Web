@@ -1,5 +1,3 @@
-/* Brighter Builds Global Navbar */
-
 :root {
 	--bb-nav-height: 74px;
 	--bb-nav-radius: 22px;
@@ -252,7 +250,7 @@
 		gap: 1rem;
 	}
 
-		.bb-navbar__menu {
+	.bb-navbar__menu {
 		position: fixed;
 		top: calc(var(--bb-nav-height) + clamp(20px, 4vw, 28px));
 		right: clamp(12px, 5vw, 24px);
@@ -269,7 +267,7 @@
 		transform: translateY(-12px);
 		pointer-events: none;
 		transition: opacity 0.28s ease, transform 0.28s ease;
-			z-index: 2;
+		z-index: 2;
 	}
 
 	.bb-navbar__menu::before {
@@ -297,24 +295,24 @@
 		margin-top: 0.7rem;
 	}
 
-		.bb-navbar__scrim {
+	.bb-navbar__scrim {
 		content: '';
 		position: fixed;
 		inset: 0;
-				display: block;
+		display: block;
 		background: rgba(4, 6, 14, 0.55);
 		backdrop-filter: blur(2px);
 		opacity: 0;
 		pointer-events: none;
 		transition: opacity 0.25s ease;
-			z-index: 1;
+		z-index: 1;
 	}
 
 	.bb-navbar.is-open .bb-navbar__scrim {
 		display: block;
 		opacity: 1;
 		pointer-events: auto;
-			z-index: 1;
+		z-index: 1;
 	}
 
 	.bb-navbar.is-open .bb-navbar__menu {
@@ -341,6 +339,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
 	.bb-navbar__brand:hover span,
 	.bb-navbar__brand:focus-visible span {
 		transform: none;
@@ -356,13 +355,16 @@
 		opacity: 0;
 		transform: translateX(-130%);
 	}
+
 	20% {
 		opacity: 1;
 	}
+
 	55% {
 		opacity: 1;
 		transform: translateX(0);
 	}
+
 	100% {
 		opacity: 0;
 		transform: translateX(130%);
@@ -381,53 +383,53 @@
 }
 
 .copy-btn {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  align-self: flex-start;
-  padding: 0.55rem 1.35rem;
-  border-radius: 12px;
-  border: 1px solid rgba(114, 221, 247, 0.3);
-  font-weight: 600;
-  font-size: 0.82rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  cursor: pointer;
-  background: rgba(9, 11, 24, 0.82);
-  color: rgba(244, 248, 255, 0.92);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease, color 0.3s ease;
-  overflow: hidden;
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	align-self: flex-start;
+	padding: 0.55rem 1.35rem;
+	border-radius: 12px;
+	border: 1px solid rgba(114, 221, 247, 0.3);
+	font-weight: 600;
+	font-size: 0.82rem;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	cursor: pointer;
+	background: rgba(9, 11, 24, 0.82);
+	color: rgba(244, 248, 255, 0.92);
+	transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease, color 0.3s ease;
+	overflow: hidden;
 }
 
 .copy-btn::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 20% -20%, rgba(114, 221, 247, 0.28), transparent 45%), radial-gradient(circle at 80% 120%, rgba(179, 136, 235, 0.28), transparent 55%);
-  opacity: 0;
-  transition: opacity 0.35s ease;
-  pointer-events: none;
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: radial-gradient(circle at 20% -20%, rgba(114, 221, 247, 0.28), transparent 45%), radial-gradient(circle at 80% 120%, rgba(179, 136, 235, 0.28), transparent 55%);
+	opacity: 0;
+	transition: opacity 0.35s ease;
+	pointer-events: none;
 }
 
 .copy-btn:hover {
-  transform: translateY(-4px);
-  border-color: rgba(179, 136, 235, 0.55);
-  background: linear-gradient(135deg, rgba(114, 221, 247, 0.2), rgba(179, 136, 235, 0.35));
-  color: #fff;
-  box-shadow: 0 16px 32px rgba(9, 12, 28, 0.45);
+	transform: translateY(-4px);
+	border-color: rgba(179, 136, 235, 0.55);
+	background: linear-gradient(135deg, rgba(114, 221, 247, 0.2), rgba(179, 136, 235, 0.35));
+	color: #fff;
+	box-shadow: 0 16px 32px rgba(9, 12, 28, 0.45);
 }
 
 .copy-btn:hover::after {
-  opacity: 1;
+	opacity: 1;
 }
 
 .copy-btn:active {
-  transform: translateY(-1px);
-  box-shadow: 0 10px 22px rgba(9, 12, 28, 0.4);
+	transform: translateY(-1px);
+	box-shadow: 0 10px 22px rgba(9, 12, 28, 0.4);
 }
 
 .copy-btn:focus-visible {
-  outline: 2px solid rgba(114, 221, 247, 0.7);
-  outline-offset: 3px;
+	outline: 2px solid rgba(114, 221, 247, 0.7);
+	outline-offset: 3px;
 }

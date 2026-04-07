@@ -68,7 +68,6 @@ p {
     transform: translateZ(15px);
 }
 
-/* Effets d'arrière-plan */
 .background-effects {
     position: fixed;
     top: 0;
@@ -136,14 +135,15 @@ p {
     transform-style: preserve-3d;
 }
 
-/* Animations */
 @keyframes float {
     0% {
         transform: translateY(0px) translateX(0px);
     }
+
     50% {
         transform: translateY(-20px) translateX(20px);
     }
+
     100% {
         transform: translateY(0px) translateX(0px);
     }
@@ -153,15 +153,16 @@ p {
     0% {
         background-position: 0% 50%;
     }
+
     50% {
         background-position: 100% 50%;
     }
+
     100% {
         background-position: 0% 50%;
     }
 }
 
-/* Animation pour les étoiles filantes */
 .meteoro {
     position: absolute;
     background-color: #fff;

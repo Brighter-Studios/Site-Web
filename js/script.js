@@ -1,4 +1,3 @@
-// Shader code
 const MAX_COLORS = 8;
 const frag = `
 #define MAX_COLORS ${MAX_COLORS}
@@ -76,7 +75,6 @@ void main() {
 }
 `;
 
-// Initialize Color Bends effect
 function initColorBends() {
   console.log('Initializing ColorBends effect...');
   const container = document.querySelector('.hero');
@@ -85,13 +83,11 @@ function initColorBends() {
   container.appendChild(colorBendsContainer);
   console.log('Container created');
 
-  // Mouse tracking
   const mouse = new THREE.Vector2(0, 0);
   const targetMouse = new THREE.Vector2(0, 0);
-  const lerpFactor = 0.05; // Ajustez cette valeur pour changer la fluidité
+  const lerpFactor = 0.05;
 
   window.addEventListener('mousemove', (event) => {
-    // Convertir la position de la souris en coordonnées normalisées (-1 à 1)
     targetMouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     targetMouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
   });
@@ -104,16 +100,15 @@ function initColorBends() {
   const scene = new THREE.Scene();
   const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
   const geometry = new THREE.PlaneGeometry(2, 2);
-  
-  // Palette de couleurs bleu-violet-rose
+
   const colors = [
-    new THREE.Vector3(0.69, 0.36, 0.99),    // Violet vif (#B15CFF)
-    new THREE.Vector3(0.53, 0.23, 0.96),    // Violet profond (#873BF4)
-    new THREE.Vector3(1, 0.35, 0.98),       // Rose vif (#FF59FA)
-    new THREE.Vector3(0.31, 0.44, 0.98)     // Bleu électrique (#4F71FA)
+    new THREE.Vector3(0.69, 0.36, 0.99),
+    new THREE.Vector3(0.53, 0.23, 0.96),
+    new THREE.Vector3(1, 0.35, 0.98),
+    new THREE.Vector3(0.31, 0.44, 0.98)
   ];
 
-  const uColorsArray = Array.from({ length: MAX_COLORS }, (_, i) => 
+  const uColorsArray = Array.from({ length: MAX_COLORS }, (_, i) =>
     i < colors.length ? colors[i] : new THREE.Vector3(0, 0, 0)
   );
   console.log('Colors initialized');
@@ -153,7 +148,7 @@ function initColorBends() {
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.setClearColor(0x000000, 0);
-  
+
   const canvas = renderer.domElement;
   canvas.style.display = 'block';
   colorBendsContainer.appendChild(canvas);
@@ -184,16 +179,13 @@ function initColorBends() {
     const elapsed = clock.getElapsedTime();
     material.uniforms.uTime.value = elapsed;
 
-    // Mise à jour fluide de la position de la souris
     lerpVector2(mouse, targetMouse, lerpFactor);
-    
-    // Appliquer un effet de parallaxe doux
+
     const parallaxX = mouse.x * 0.1;
     const parallaxY = mouse.y * 0.1;
     scene.position.x = parallaxX;
     scene.position.y = parallaxY;
-    
-    // Mettre à jour les uniformes du shader
+
     material.uniforms.uPointer.value.copy(mouse);
 
     renderer.render(scene, camera);
@@ -202,7 +194,6 @@ function initColorBends() {
   animate();
 }
 
-// Wait for DOM to load
 document.addEventListener('DOMContentLoaded', initColorBends);
 
 const cursor = document.querySelector('.cursor');
@@ -221,12 +212,10 @@ document.addEventListener('mousemove', (e) => {
 });
 
 function updateCursor() {
-  // Smooth interpolation for main cursor
   cursorX += (mouseX - cursorX) * 0.2;
   cursorY += (mouseY - cursorY) * 0.2;
   cursor.style.transform = `translate(${cursorX}px, ${cursorY}px) translate(-50%, -50%)`;
 
-  // Smoother follower with slight delay
   followerX += (mouseX - followerX) * 0.1;
   followerY += (mouseY - followerY) * 0.1;
   cursorFollower.style.transform = `translate(${followerX}px, ${followerY}px) translate(-50%, -50%)`;
@@ -264,7 +253,6 @@ function init() {
   function getRandomArbitrary(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
   }
-  //meteoros
 
   var numeroAleatorio = 5000;
 
@@ -299,14 +287,14 @@ var renderer = new THREE.WebGLRenderer({ alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-window.addEventListener("resize", function() {
+window.addEventListener("resize", function () {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
-  renderer.setSize( window.innerWidth, window.innerHeight);
+  renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
 const loader = new THREE.TextureLoader();
-  
+
 const distance = Math.min(300, window.innerWidth);
 const geometry = new THREE.BufferGeometry();
 const vertices = [];
@@ -356,7 +344,6 @@ function onMouseMove(event) {
 }
 animate();
 
-// Scaling animation
 var animProps = { scale: 1, xRot: 0, yRot: 0 };
 gsap.to(animProps, {
   duration: 16,
@@ -385,187 +372,172 @@ gsap.to(animProps, {
   },
 });
 
-// Configuration de l'effet 3D des cartes
 const initProjectCards = () => {
-    if (typeof VanillaTilt === 'undefined') {
-        console.warn('VanillaTilt n\'est pas chargé');
-        return;
-    }
+  if (typeof VanillaTilt === 'undefined') {
+    console.warn('VanillaTilt n\'est pas chargé');
+    return;
+  }
 
-    const cards = document.querySelectorAll('.project-card');
-    
-    cards.forEach(card => {
-        // Initialisation de l'effet tilt
-        VanillaTilt.init(card, {
-            reverse: false,
-            max: 10,
-            startX: 0,
-            startY: 0,
-            perspective: 1500,
-            scale: 1.03,
-            speed: 300,
-            transition: true,
-            axis: null,
-            reset: true,
-            "full-page-listening": false,
-            gyroscope: false,
-            gyroscopeMinAngleX: -45,
-            gyroscopeMaxAngleX: 45,
-            gyroscopeMinAngleY: -45,
-            gyroscopeMaxAngleY: 45
-        });
+  const cards = document.querySelectorAll('.project-card');
 
-        // Ajouter la classe pour activer la perspective 3D
-        card.style.transformStyle = 'preserve-3d';
-        
-        // Sélectionner les éléments internes
-        const content = card.querySelector('.project-content');
-        const image = card.querySelector('.project-image');
-        const title = card.querySelector('h3');
-        const description = card.querySelector('p');
-        const button = card.querySelector('.project-btn');
-
-        // Appliquer les transformations 3D
-        if (content) content.style.transform = 'translateZ(30px)';
-        if (image) image.style.transform = 'translateZ(40px)';
-        if (title) title.style.transform = 'translateZ(50px)';
-        if (description) description.style.transform = 'translateZ(40px)';
-        if (button) button.style.transform = 'translateZ(45px)';
+  cards.forEach(card => {
+    VanillaTilt.init(card, {
+      reverse: false,
+      max: 10,
+      startX: 0,
+      startY: 0,
+      perspective: 1500,
+      scale: 1.03,
+      speed: 300,
+      transition: true,
+      axis: null,
+      reset: true,
+      "full-page-listening": false,
+      gyroscope: false,
+      gyroscopeMinAngleX: -45,
+      gyroscopeMaxAngleX: 45,
+      gyroscopeMinAngleY: -45,
+      gyroscopeMaxAngleY: 45
     });
+
+    card.style.transformStyle = 'preserve-3d';
+
+    const content = card.querySelector('.project-content');
+    const image = card.querySelector('.project-image');
+    const title = card.querySelector('h3');
+    const description = card.querySelector('p');
+    const button = card.querySelector('.project-btn');
+
+    if (content) content.style.transform = 'translateZ(30px)';
+    if (image) image.style.transform = 'translateZ(40px)';
+    if (title) title.style.transform = 'translateZ(50px)';
+    if (description) description.style.transform = 'translateZ(40px)';
+    if (button) button.style.transform = 'translateZ(45px)';
+  });
 };
 
-// Attendre que le DOM soit chargé
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initProjectCards);
+  document.addEventListener('DOMContentLoaded', initProjectCards);
 } else {
-    initProjectCards();
+  initProjectCards();
 }
 
-// Configuration de l'effet 3D des box
 const initBoxTilt = () => {
-    const boxes = document.querySelectorAll('.container .box');
-    
-    boxes.forEach(box => {
-        VanillaTilt.init(box, {
-            max: 25, // Augmentation de l'angle maximal
-            speed: 400,
-            glare: true,
-            "max-glare": 0.5,
-            scale: 1.1, // Agrandissement au survol
-            perspective: 1000,
-            easing: "cubic-bezier(.03,.98,.52,.99)",
-            transition: true
-        });
+  const boxes = document.querySelectorAll('.container .box');
 
-        // Ajout d'une class pour le style 3D
-        box.style.transformStyle = 'preserve-3d';
-        
-        // Ajouter l'effet de profondeur sur le contenu
-        const content = box.querySelector('b');
-        if (content) {
-            content.style.transform = 'translateZ(50px)';
-        }
+  boxes.forEach(box => {
+    VanillaTilt.init(box, {
+      max: 25,
+      speed: 400,
+      glare: true,
+      "max-glare": 0.5,
+      scale: 1.1,
+      perspective: 1000,
+      easing: "cubic-bezier(.03,.98,.52,.99)",
+      transition: true
     });
+    box.style.transformStyle = 'preserve-3d';
+
+    const content = box.querySelector('b');
+    if (content) {
+      content.style.transform = 'translateZ(50px)';
+    }
+  });
 };
 
-// Initialiser l'effet quand le DOM est chargé
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initBoxTilt);
+  document.addEventListener('DOMContentLoaded', initBoxTilt);
 } else {
-    initBoxTilt();
+  initBoxTilt();
 }
 
-// Configuration et initialisation des particules
 particlesJS("particles-js", {
-    particles: {
-        number: {
-            value: 80,
-            density: {
-                enable: true,
-                value_area: 800
-            }
-        },
-        color: {
-            value: ["#8093F1", "#B388EB", "#F7AEF8"]
-        },
-        shape: {
-            type: "circle"
-        },
-        opacity: {
-            value: 0.5,
-            random: true
-        },
-        size: {
-            value: 3,
-            random: true
-        },
-        move: {
-            enable: true,
-            speed: 2,
-            direction: "none",
-            random: true,
-            out_mode: "out"
-        }
+  particles: {
+    number: {
+      value: 80,
+      density: {
+        enable: true,
+        value_area: 800
+      }
     },
-    interactivity: {
-        detect_on: "canvas",
-        events: {
-            onhover: {
-                enable: true,
-                mode: "grab"
-            },
-            onclick: {
-                enable: true,
-                mode: "push"
-            },
-            resize: true
-        }
+    color: {
+      value: ["#8093F1", "#B388EB", "#F7AEF8"]
+    },
+    shape: {
+      type: "circle"
+    },
+    opacity: {
+      value: 0.5,
+      random: true
+    },
+    size: {
+      value: 3,
+      random: true
+    },
+    move: {
+      enable: true,
+      speed: 2,
+      direction: "none",
+      random: true,
+      out_mode: "out"
     }
+  },
+  interactivity: {
+    detect_on: "canvas",
+    events: {
+      onhover: {
+        enable: true,
+        mode: "grab"
+      },
+      onclick: {
+        enable: true,
+        mode: "push"
+      },
+      resize: true
+    }
+  }
 });
 
 window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const parallaxBg = document.querySelector('.parallax-bg');
-    parallaxBg.style.transform = `translateY(${scrolled * 0.5}px)`;
+  const scrolled = window.pageYOffset;
+  const parallaxBg = document.querySelector('.parallax-bg');
+  parallaxBg.style.transform = `translateY(${scrolled * 0.5}px)`;
 });
 
 document.addEventListener('mousemove', (e) => {
-    const space = document.querySelector('.space');
-    const stars = document.querySelector('.stars1');
-    const flares = document.querySelectorAll('.flare');
-    
-    const mouseX = e.clientX / window.innerWidth;
-    const mouseY = e.clientY / window.innerHeight;
-    
-    // Effet de parallaxe sur l'espace et les étoiles
-    if (space) {
-        space.style.transform = `translate3d(${mouseX * -30}px, ${mouseY * -30}px, 0)`;
-    }
-    if (stars) {
-        stars.style.transform = `translate3d(${mouseX * -50}px, ${mouseY * -50}px, 0)`;
-    }
-    
-    // Effet de parallaxe sur les flares lumineux
-    flares.forEach((flare, index) => {
-        const depth = (index + 1) * 0.2;
-        flare.style.transform = `translate3d(${mouseX * -70 * depth}px, ${mouseY * -70 * depth}px, 0)`;
-    });
+  const space = document.querySelector('.space');
+  const stars = document.querySelector('.stars1');
+  const flares = document.querySelectorAll('.flare');
+
+  const mouseX = e.clientX / window.innerWidth;
+  const mouseY = e.clientY / window.innerHeight;
+
+  if (space) {
+    space.style.transform = `translate3d(${mouseX * -30}px, ${mouseY * -30}px, 0)`;
+  }
+  if (stars) {
+    stars.style.transform = `translate3d(${mouseX * -50}px, ${mouseY * -50}px, 0)`;
+  }
+
+  flares.forEach((flare, index) => {
+    const depth = (index + 1) * 0.2;
+    flare.style.transform = `translate3d(${mouseX * -70 * depth}px, ${mouseY * -70 * depth}px, 0)`;
+  });
 });
 
-// Animation des cartes au scroll
 const observerOptions = {
-    threshold: 0.1
+  threshold: 0.1
 };
 
 const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = "1";
-            entry.target.style.transform = "translateY(0)";
-        }
-    });
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = "1";
+      entry.target.style.transform = "translateY(0)";
+    }
+  });
 }, observerOptions);
 
 document.querySelectorAll('.project-card').forEach(card => {
-    observer.observe(card);
+  observer.observe(card);
 });

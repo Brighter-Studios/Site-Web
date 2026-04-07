@@ -5,13 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!scrollButton || !hero || !projectsSection) return;
 
-    // Fonction pour vérifier si le hero est entièrement visible
     function isHeroFullyVisible() {
         const heroRect = hero.getBoundingClientRect();
         return heroRect.top >= 0 && heroRect.bottom <= window.innerHeight;
     }
 
-    // Fonction pour gérer la visibilité du bouton
     function updateButtonVisibility() {
         if (isHeroFullyVisible()) {
             scrollButton.classList.remove('hidden');
@@ -20,14 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Gérer le clic sur le bouton
     scrollButton.addEventListener('click', () => {
         projectsSection.scrollIntoView({ behavior: 'smooth' });
     });
 
-    // Mettre à jour la visibilité du bouton au scroll
     window.addEventListener('scroll', updateButtonVisibility);
-    
-    // Vérifier la visibilité initiale
+
     updateButtonVisibility();
 });

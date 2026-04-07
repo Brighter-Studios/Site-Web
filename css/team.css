@@ -1,0 +1,478 @@
+:root {
+  --section-main: #ff0053;
+  --section-dark: #7a002e;
+}
+
+body.dynamic-section {
+  transition: background 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.space.stars1,
+.background-effects .flare,
+.particles-js {
+  transition: background 0.7s cubic-bezier(0.4, 0, 0.2, 1), filter 0.7s;
+}
+
+.contact-btn,
+.team-card {
+  transition: border-color 0.5s, box-shadow 0.5s, background 0.5s;
+}
+
+.profile-image {
+  transition: border-color 0.5s, box-shadow 0.5s;
+}
+
+.contact-btn {
+  border-color: var(--section-main, #ff0053);
+  background: linear-gradient(90deg, var(--section-main, #ff0053), var(--section-dark, #7a002e));
+  color: #fff;
+}
+
+.contact-btn:hover {
+  background: linear-gradient(90deg, var(--section-dark, #7a002e), var(--section-main, #ff0053));
+  color: #fff;
+}
+
+.team-card {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transform: perspective(1000px) translateZ(0) scale(1);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.5s, box-shadow 0.5s;
+  will-change: transform;
+  border: 2px solid #B388EB;
+  box-shadow: none;
+
+  .magenoir {
+    background-image: url(/assets/mage_noir-bg.png);
+  }
+}
+
+.profile-image {
+  border: 3px solid var(--section-main, #ff0053);
+}
+
+.team-section {
+  position: relative;
+  min-height: 100vh;
+  padding: 120px 2rem 2rem;
+  background: radial-gradient(circle at center, #050028 0%, #030014 100%);
+  overflow: hidden;
+}
+
+.team-container {
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+  z-index: 2;
+}
+
+.team-section h1 {
+  font-size: 3.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #F7AEF8, #B388EB, #8093F1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.team-description {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.2rem;
+  margin-bottom: 4rem;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease forwards 0.2s;
+}
+
+.team-category {
+  margin-bottom: 6rem;
+  position: relative;
+}
+
+.team-category h2 {
+  font-size: 2rem;
+  margin-bottom: 3rem;
+  text-align: center;
+  color: #F7AEF8;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease forwards;
+  position: relative;
+  padding-bottom: 2rem;
+}
+
+.team-category h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 2px;
+  background: linear-gradient(90deg,
+      transparent,
+      #F7AEF8,
+      #B388EB,
+      #8093F1,
+      #B388EB,
+      #F7AEF8,
+      transparent);
+  opacity: 0.5;
+  filter: blur(1px);
+}
+
+.team-category h2::before {
+  content: '✧';
+  position: absolute;
+  bottom: -0.8rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+  color: #F7AEF8;
+  padding: 0 1rem;
+  z-index: 1;
+  text-shadow: 0 0 10px #B388EB;
+  background: transparent;
+}
+
+.team-category:not(:last-child)::after,
+.team-category:not(:last-child)::before {
+  content: none;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 0 1rem;
+  justify-content: center;
+}
+
+.team-card::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(45deg,
+      #FDC5F5,
+      #F7AEF8,
+      #B388EB,
+      #8093F1,
+      #72DDF7,
+      #FDC5F5);
+  background-size: 300% 300%;
+  border-radius: 22px;
+  z-index: -2;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: borderGradient 3s ease infinite;
+}
+
+.team-card::after {
+  content: '';
+  position: absolute;
+  inset: -40px;
+  background: radial-gradient(circle at var(--mouse-x, center) var(--mouse-y, center),
+      rgba(179, 136, 235, 0.4),
+      rgba(128, 147, 241, 0.4),
+      transparent 70%);
+  z-index: -1;
+  border-radius: 30px;
+  opacity: 0;
+  filter: blur(25px);
+  transform: scale(0.8);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.team-card:hover {
+  transform: perspective(1000px) translateZ(50px) scale(1.1);
+}
+
+.team-card:hover::before {
+  opacity: 1;
+}
+
+.team-card:hover::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.card-content {
+  background: rgba(3, 0, 20, 0.95);
+  padding: 2rem;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.profile-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid transparent;
+  background: linear-gradient(135deg, #FDC5F5, #F7AEF8, #B388EB, #8093F1) border-box;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 1;
+}
+
+.profile-image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #030014;
+  margin: 2px;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.profile-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  transform: scale(1);
+  transition: transform 0.3s ease;
+  position: relative;
+  z-index: 2;
+  display: block;
+}
+
+.profile-image img[src$=".gif"] {
+  filter: contrast(1.1) brightness(1.1);
+}
+
+.team-card:hover .profile-image {
+  transform: translateZ(30px) scale(1.1);
+  box-shadow: 0 0 25px rgba(179, 136, 235, 0.5);
+}
+
+.team-card:hover .profile-image img {
+  transform: scale(1.05);
+}
+
+.team-card h3 {
+  font-size: 1.5rem;
+  color: #fff;
+  margin: 0.5rem 0;
+  transform: translateZ(20px);
+}
+
+.team-card .role {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  transform: translateZ(15px);
+}
+
+.contact-btn {
+  position: relative;
+  padding: 10px 20px;
+  border-radius: 7px;
+  border: 1px solid #B388EB;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 2px;
+  background: transparent;
+  color: #fff;
+  overflow: hidden;
+  box-shadow: 0 0 0 0 transparent;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  cursor: pointer;
+  margin-top: 1rem;
+  transform: translateZ(25px);
+}
+
+.contact-btn:hover {
+  background: linear-gradient(45deg, #FDC5F5, #F7AEF8, #B388EB, #8093F1);
+  background-size: 300% 300%;
+  animation: gradientMovement 3s ease infinite;
+  box-shadow: 0 0 30px 5px rgba(179, 136, 235, 0.4);
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+.contact-btn:hover::before {
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 50px 30px rgba(255, 255, 255, 0.8);
+  -webkit-animation: sh02 0.5s 0s linear;
+  -moz-animation: sh02 0.5s 0s linear;
+  animation: sh02 0.5s 0s linear;
+}
+
+.contact-btn::before {
+  content: '';
+  display: block;
+  width: 0px;
+  height: 86%;
+  position: absolute;
+  top: 7%;
+  left: 0%;
+  opacity: 0;
+  background: #fff;
+  box-shadow: 0 0 50px 30px #fff;
+  -webkit-transform: skewX(-20deg);
+  -moz-transform: skewX(-20deg);
+  -ms-transform: skewX(-20deg);
+  -o-transform: skewX(-20deg);
+  transform: skewX(-20deg);
+}
+
+@keyframes sh02 {
+  from {
+    opacity: 0;
+    left: 0%;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    left: 100%;
+  }
+}
+
+.contact-btn:active {
+  box-shadow: 0 0 0 0 transparent;
+  -webkit-transition: box-shadow 0.2s ease-in;
+  -moz-transition: box-shadow 0.2s ease-in;
+  transition: box-shadow 0.2s ease-in;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .team-section {
+    padding-top: 100px;
+  }
+
+  .team-section h1 {
+    font-size: 2.5rem;
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    justify-content: center;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.team-card:hover .card-content {
+  transform: translateZ(50px);
+}
+
+.background-effects {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.particles-js {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes gradientMovement {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.team-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: linear-gradient(45deg,
+      rgba(179, 136, 235, 0.1),
+      rgba(128, 147, 241, 0.1),
+      rgba(114, 221, 247, 0.1));
+  background-size: 400% 400%;
+  animation: gradientMovement 15s ease infinite;
+  pointer-events: none;
+}
+
+.space {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+@keyframes borderGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.louloudelta-card {
+  transition: box-shadow 0.3s, border 0.3s;
+}
+
+.louloudelta-card.gold {
+  box-shadow: 0 0 20px 4px gold, 0 0 0 4px #ffd700;
+  border: 2px solid #ffd700;
+}
+
+.louloudelta-img:hover {
+  cursor: pointer;
+}

@@ -1,10 +1,8 @@
-// Création des étoiles
 document.addEventListener('DOMContentLoaded', () => {
     const starsContainer = document.createElement('div');
     starsContainer.className = 'stars-container';
     document.body.appendChild(starsContainer);
 
-    // Créer des étoiles statiques
     for (let i = 0; i < 50; i++) {
         const star = document.createElement('div');
         star.className = 'star';

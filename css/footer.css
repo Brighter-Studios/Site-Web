@@ -1,5 +1,3 @@
-/* Brighter Builds Global Footer */
-
 :root {
   --bb-footer-radius: 26px;
   --bb-footer-bg: rgba(12, 14, 28, 0.75);
@@ -263,6 +261,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .bb-footer__link,
   .bb-footer__cta,
   .bb-footer__brand-link {
