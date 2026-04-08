@@ -4,14 +4,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV Jimbo - The Original Joker</title>
+    <title>CV Jimbo</title>
     <link rel="stylesheet" href="css/CV.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/style.css">
     <meta property="og:title" content="Jimbo CV">
-    <meta property="og:description" content="The Original Joker's Resume">
+    <meta property="og:description" content="jimbo est trop beau et famous">
     <link rel="shortcut icon" href="logo.png" type="image/png">
 </head>
 
 <body>
+    <header class="bb-navbar" data-navbar>
+        <span class="bb-navbar__scrim" data-navbar-scrim></span>
+        <div class="bb-navbar__shell">
+            <div class="bb-navbar__inner">
+                <a class="bb-navbar__brand" href="index.html" aria-label="Retour à l'accueil Brighter Builds">
+                    <img src="logo.png" alt="Logo Brighter Builds">
+                    <span>Brighter Builds</span>
+                </a>
+
+                <button class="bb-navbar__toggle" type="button" data-navbar-toggle aria-controls="bb-navbar-menu"
+                    aria-expanded="false">
+                    <span class="sr-only">Afficher le menu</span>
+                    <span></span>
+                </button>
+
+                <nav class="bb-navbar__menu" id="bb-navbar-menu" data-navbar-menu aria-label="Navigation principale">
+                    <a class="bb-navbar__link" href="projects.html">Projets</a>
+                    <a class="bb-navbar__link" href="team.html">Equipe</a>
+                    <a class="bb-navbar__link" href="recrutement.html">Recrutement</a>
+                    <a class="bb-navbar__link" href="reseaux.html">Réseaux</a>
+                    <a class="copy-btn" href="https://discord.gg/8AsrS9Vtjt" target="_blank" rel="noopener">Discord</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
     <div id="canvas-container">
         <canvas id="balatro-bg"></canvas>
     </div>
@@ -25,7 +54,7 @@
                 </div>
                 <div class="title-group">
                     <h1 class="joker-title">Jimbo</h1>
-                    <p class="joker-subtitle">"The Original"</p>
+                    <p class="joker-subtitle"></p>
                 </div>
                 <div class="stats">
                     <div class="stat-box">
@@ -59,7 +88,7 @@
                     </div>
                 </section>
                 <section class="section">
-                    <h2>Skills & Buffs</h2>
+                    <h2>Skills</h2>
                     <ul class="skills-list">
                         <li>Cool tag</li>
                         <li>Even cooler tag</li>
@@ -79,6 +108,33 @@
 
             </div>
         </main>
+        <footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Navigation</h3>
+                    <nav class="footer-nav">
+                        <a href="projects.html">Projets</a>
+                        <a href="team.html">Equipe</a>
+                        <a href="recrutement.html">Recrutement</a>
+                        <a href="reseaux.html">Réseaux</a>
+                        <a href="https://discord.gg/8AsrS9Vtjt" target="_blank">Nous contacter</a>
+                    </nav>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Nous soutenir</h3>
+                    <div class="kofi-widget">
+                        <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
+                        <script
+                            type='text/javascript'>kofiwidget2.init('Soutenez nous !', '#b388eb', 'H2H71EL9VU'); kofiwidget2.draw();</script>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; Brighter Builds 2025 - All Rights Reserved</p>
+            </div>
+        </footer>
     </div>
     <script src="js/CV.js"></script>
 </body>
