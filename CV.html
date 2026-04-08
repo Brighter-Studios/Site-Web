@@ -45,6 +45,7 @@
         <canvas id="balatro-bg"></canvas>
     </div>
     <div class="crt-overlay"></div>
+
     <div class="screen-container">
         <main class="cv-wrapper">
             <div class="left-col">
@@ -132,10 +133,149 @@
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; Brighter Builds 2025 - All Rights Reserved</p>
+                <p>&copy; Brighter Builds 2026 - All Rights Reserved</p>
             </div>
         </footer>
     </div>
+
+    <div class="media-player-fixed">
+        <div class="player-wrapper">
+            <div class="vinyl-container">
+                <svg width="128" height="128" viewBox="0 0 128 128" class="vinyl-svg">
+                    <svg>
+                        <rect width="128" height="128" fill="black"></rect>
+                        <circle cx="20" cy="20" r="2" fill="white"></circle>
+                        <circle cx="40" cy="30" r="2" fill="white"></circle>
+                        <circle cx="60" cy="10" r="2" fill="white"></circle>
+                        <circle cx="80" cy="40" r="2" fill="white"></circle>
+                        <circle cx="100" cy="20" r="2" fill="white"></circle>
+                        <circle cx="120" cy="50" r="2" fill="white"></circle>
+                        <circle cx="90" cy="30" r="10" fill="white" fill-opacity="0.5"></circle>
+                        <circle cx="90" cy="30" r="8" fill="white"></circle>
+                        <path d="M0 128 Q32 64 64 128 T128 128" fill="purple" stroke="black" stroke-width="1"></path>
+                        <path d="M0 128 Q32 48 64 128 T128 128" fill="mediumpurple" stroke="black" stroke-width="1">
+                        </path>
+                        <path d="M0 128 Q32 32 64 128 T128 128" fill="rebeccapurple" stroke="black" stroke-width="1">
+                        </path>
+                        <path d="M0 128 Q16 64 32 128 T64 128" fill="purple" stroke="black" stroke-width="1"></path>
+                        <path d="M64 128 Q80 64 96 128 T128 128" fill="mediumpurple" stroke="black" stroke-width="1">
+                        </path>
+                    </svg>
+                </svg>
+                <div class="vinyl-hole"></div>
+            </div>
+
+            <div class="player-box">
+                <div class="player-top-row">
+                    <div class="hover-vinyl-container">
+                        <svg width="96" height="96" viewBox="0 0 128 128" class="hover-vinyl-svg">
+                            <svg>
+                                <rect width="128" height="128" fill="black"></rect>
+                                <circle cx="20" cy="20" r="2" fill="white"></circle>
+                                <circle cx="40" cy="30" r="2" fill="white"></circle>
+                                <circle cx="60" cy="10" r="2" fill="white"></circle>
+                                <circle cx="80" cy="40" r="2" fill="white"></circle>
+                                <circle cx="100" cy="20" r="2" fill="white"></circle>
+                                <circle cx="120" cy="50" r="2" fill="white"></circle>
+                                <circle cx="90" cy="30" r="10" fill="white" fill-opacity="0.5"></circle>
+                                <circle cx="90" cy="30" r="8" fill="white"></circle>
+                                <path d="M0 128 Q32 64 64 128 T128 128" fill="purple" stroke="black" stroke-width="1">
+                                </path>
+                                <path d="M0 128 Q32 48 64 128 T128 128" fill="mediumpurple" stroke="black"
+                                    stroke-width="1"></path>
+                                <path d="M0 128 Q32 32 64 128 T128 128" fill="rebeccapurple" stroke="black"
+                                    stroke-width="1"></path>
+                                <path d="M0 128 Q16 64 32 128 T64 128" fill="purple" stroke="black" stroke-width="1">
+                                </path>
+                                <path d="M64 128 Q80 64 96 128 T128 128" fill="mediumpurple" stroke="black"
+                                    stroke-width="1"></path>
+                            </svg>
+                        </svg>
+                        <div class="hover-vinyl-hole"></div>
+                    </div>
+
+                    <div class="player-info">
+                        <p class="title">Balatro OST</p>
+                        <p class="artist">Main Theme</p>
+                    </div>
+                </div>
+
+                <div class="progress-row">
+                    <span class="time start">0:00</span>
+                    <input type="range" min="0" max="100" value="0" class="progress-slider" />
+                    <span class="time end">3:45</span>
+                </div>
+
+                <div class="controls-row">
+                    <label for="playMode" class="control-btn mode">
+                        <input type="checkbox" id="playMode" class="peer-input" />
+                        <svg class="icon-repeat" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                            viewBox="0 0 24 24" fill="none" stroke="#777" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <polyline points="17 1 21 5 17 9"></polyline>
+                            <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+                            <polyline points="7 23 3 19 7 15"></polyline>
+                            <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+                        </svg>
+                        <svg class="icon-shuffle" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                            viewBox="0 0 24 24" fill="none" stroke="#777" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <polyline points="16 3 21 3 21 8"></polyline>
+                            <line x1="4" y1="20" x2="21" y2="3"></line>
+                            <polyline points="21 16 21 21 16 21"></polyline>
+                            <line x1="15" y1="15" x2="21" y2="21"></line>
+                            <line x1="4" y1="4" x2="9" y2="9"></line>
+                        </svg>
+                    </label>
+
+                    <div class="control-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="19 20 9 12 19 4 19 20"></polygon>
+                            <line x1="5" y1="19" x2="5" y2="5"></line>
+                        </svg>
+                    </div>
+
+                    <label for="playStatus" class="control-btn play-pause">
+                        <input type="checkbox" id="playStatus" class="peer-input" />
+                        <svg class="icon-play" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                        <svg class="icon-pause" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="6" y="4" width="4" height="16"></rect>
+                            <rect x="14" y="4" width="4" height="16"></rect>
+                        </svg>
+                    </label>
+
+                    <div class="control-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="5 4 15 12 5 20 5 4"></polygon>
+                            <line x1="19" y1="5" x2="19" y2="19"></line>
+                        </svg>
+                    </div>
+
+                    <div class="control-btn list-btn">
+                        <svg class="icon-list" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                            viewBox="0 0 24 24" fill="none" stroke="#777" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <line x1="8" y1="6" x2="21" y2="6"></line>
+                            <line x1="8" y1="12" x2="21" y2="12"></line>
+                            <line x1="8" y1="18" x2="21" y2="18"></line>
+                            <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                            <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                            <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="js/CV.js"></script>
 </body>
 
