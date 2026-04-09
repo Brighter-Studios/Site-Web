@@ -9,23 +9,59 @@ document.addEventListener('DOMContentLoaded', () => {
             jimboCard.style.transform = 'scale(0.9)';
             setTimeout(() => {
                 jimboCard.src = isGif ? 'assets/CV/balatro-jimbo.gif' : 'assets/CV/jimbo.webp';
-                jimboCard.style.transform = '';
+                // La transformation sera réinitialisée par le mousemove ou le mouseleave
             }, 150);
         });
+
+        const handleTilt = (e) => {
+            const rect = jimboCard.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            // Max rotation (degrees)
+            const maxRotate = 25; 
+            const rotateX = ((y - centerY) / centerY) * -maxRotate;
+            const rotateY = ((x - centerX) / centerX) * maxRotate;
+            
+            jimboCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.08) translateY(-10px)`;
+        };
+
+        const resetTilt = () => {
+            jimboCard.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+            // Petite pause avant de laisser l'animation 'float' du CSS reprendre si besoin
+            setTimeout(() => {
+                jimboCard.style.transform = '';
+            }, 100);
+        };
+
+        jimboCard.addEventListener('mousemove', handleTilt);
+        jimboCard.addEventListener('mouseleave', resetTilt);
     }
 
     const playlist = [
         {
             src: 'assets/CV/balatro.mp3',
-            title: 'Balatro OST',
-            artist: 'Main Theme',
-            colors: ['#ff4c40', '#009dff', '#c52321', '#7b559c', '#0059aa']
+            title: 'Main Theme',
+            artist: 'Balatro OST - Louis V',
+            colors: ['#ff4c40', '#009dff', '#c52321', '#7b559c', '#0059aa'],
+            bgColor: 'black'
+        },
+        {
+            src: 'assets/CV/balatro-b-side.mp3',
+            title: 'B-sides',
+            artist: 'Balatro OST - Louis V',
+            colors: ['#ff4c40', '#009dff', '#c52321', '#7b559c', '#0059aa'],
+            bgColor: '#630000ff'
         },
         {
             src: 'assets/CV/balatrocryptid.mp3',
-            title: 'Cryptid OST',
-            artist: 'Mod Theme',
-            colors: ['#009dff', '#ffe680', '#1d8ced', '#f5b244', '#0f65b8']
+            title: 'Madness theme',
+            artist: 'Cryptid OST - Mod Theme',
+            colors: ['#009dff', '#ffe680', '#1d8ced', '#f5b244', '#0f65b8'],
+            bgColor: '#5377C4'
         }
     ];
 
@@ -34,7 +70,10 @@ document.addEventListener('DOMContentLoaded', () => {
     audio.volume = 0.5;
 
     const playBtn = document.getElementById('playStatus');
-    const playModeBtn = document.getElementById('playMode');
+    const muteBtn = document.getElementById('muteBtn');
+    const volumeSlider = document.getElementById('volumeSlider');
+    const iconVolHigh = document.querySelector('.icon-vol-high');
+    const iconVolMute = document.querySelector('.icon-vol-mute');
     const progressSlider = document.querySelector('.progress-slider');
     const timeStart = document.querySelector('.time.start');
     const timeEnd = document.querySelector('.time.end');
@@ -55,17 +94,21 @@ document.addEventListener('DOMContentLoaded', () => {
         audio.src = track.src;
         titleEl.textContent = track.title;
         artistEl.textContent = track.artist;
-        
+
         // Update SVG colors
         track.colors.forEach((color, i) => {
             const paths = document.querySelectorAll(`.v-path-${i + 1}`);
             paths.forEach(p => p.setAttribute('fill', color));
         });
-        
+
+        // Update Background color
+        const rects = document.querySelectorAll('.vinyl-svg rect, .hover-vinyl-svg rect');
+        rects.forEach(r => r.setAttribute('fill', track.bgColor));
+
         // Setup initial background
         progressSlider.value = 0;
         updateSliderBackground(0);
-        
+
         // Active stat in playlist
         document.querySelectorAll('.playlist-item').forEach((item, i) => {
             if (i === idx) item.classList.add('active');
@@ -104,11 +147,11 @@ document.addEventListener('DOMContentLoaded', () => {
         playlist.forEach((track, idx) => {
             const item = document.createElement('div');
             item.className = 'playlist-item';
-            
+
             // create mini vinyl using svg html
             const svgContent = `
                 <svg width="32" height="32" viewBox="0 0 128 128" class="mini-vinyl">
-                    <rect width="128" height="128" fill="black"></rect>
+                    <rect width="128" height="128" fill="${track.bgColor}"></rect>
                     <circle cx="20" cy="20" r="2" fill="white"></circle>
                     <circle cx="40" cy="30" r="2" fill="white"></circle>
                     <circle cx="60" cy="10" r="2" fill="white"></circle>
@@ -122,9 +165,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     <path d="M0 128 Q32 32 64 128 T128 128" fill="${track.colors[2]}" stroke="black" stroke-width="1"></path>
                     <path d="M0 128 Q16 64 32 128 T64 128" fill="${track.colors[3]}" stroke="black" stroke-width="1"></path>
                     <path d="M64 128 Q80 64 96 128 T128 128" fill="${track.colors[4]}" stroke="black" stroke-width="1"></path>
+                    <!-- Center Hole -->
+                    <circle cx="64" cy="64" r="12" fill="white" stroke="#ccc" stroke-width="2"></circle>
+                    <circle cx="64" cy="64" r="4" fill="black"></circle>
                 </svg>
             `;
-            
+
             item.innerHTML = `
                 ${svgContent}
                 <div class="infos">
@@ -132,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p class="t-artist">${track.artist}</p>
                 </div>
             `;
-            
+
             item.addEventListener('click', () => {
                 currentTrackIdx = idx;
                 loadTrack(idx);
@@ -160,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // prev / next buttons
         if (prevBtn) prevBtn.addEventListener('click', playPrev);
         if (nextBtn) nextBtn.addEventListener('click', playNext);
-        
+
         // toggle playlist menu
         if (listBtn) {
             listBtn.addEventListener('click', (e) => {
@@ -198,21 +244,49 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         audio.addEventListener('ended', () => {
-            // Loop functionality based on playMode checkbox
-            // checked = shuffle icon -> actually represents "Play All" or "Shuffle" in standard UI
-            // unchecked = repeat icon -> represents "Loop Current"
-            // Wait, standard UI: Repeat icon means loop. The user said:
-            // "soit on reste sur la même musique soit on passe sur celle de cryptid"
-            // Let's implement: if NOT checked (repeat current visible), we loop.
-            // If checked (shuffle visible), we pass to next.
-            if (playModeBtn && !playModeBtn.checked) {
-                audio.currentTime = 0;
-                audio.play();
-            } else {
-                playNext();
-            }
+            playNext();
         });
-        
+
+        let previousVolume = 0.5;
+        if (muteBtn && volumeSlider) {
+            audio.volume = previousVolume;
+            volumeSlider.value = previousVolume * 100;
+
+            const updateVolumeUI = (vol) => {
+                if (vol === 0) {
+                    iconVolHigh.style.display = 'none';
+                    iconVolMute.style.display = 'inline-block';
+                } else {
+                    iconVolHigh.style.display = 'inline-block';
+                    iconVolMute.style.display = 'none';
+                }
+                volumeSlider.style.background = `linear-gradient(to right, oklch(0% 0 0) ${vol * 100}%, var(--gray-300) ${vol * 100}%)`;
+            };
+
+            updateVolumeUI(audio.volume);
+
+            muteBtn.addEventListener('click', () => {
+                if (audio.volume > 0) {
+                    previousVolume = audio.volume;
+                    audio.volume = 0;
+                    volumeSlider.value = 0;
+                } else {
+                    audio.volume = previousVolume || 0.5;
+                    volumeSlider.value = audio.volume * 100;
+                }
+                updateVolumeUI(audio.volume);
+            });
+
+            volumeSlider.addEventListener('input', (e) => {
+                const vol = e.target.value / 100;
+                audio.volume = vol;
+                if (vol > 0) {
+                    previousVolume = vol;
+                }
+                updateVolumeUI(vol);
+            });
+        }
+
         loadTrack(0);
     }
 
