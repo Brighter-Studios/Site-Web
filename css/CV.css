@@ -365,6 +365,7 @@ html {
   flex-direction: column;
   align-items: center;
   user-select: none;
+  position: relative;
 }
 
 @keyframes spinPlayer {
@@ -391,6 +392,11 @@ html {
   border-radius: 50%;
   box-shadow: 0 4px 6px -1px oklch(0% 0 0 / 0.1);
   animation: spinPlayer 3s linear infinite;
+  animation-play-state: paused;
+}
+
+.player-wrapper.playing .vinyl-svg {
+  animation-play-state: running;
 }
 
 .vinyl-hole {
@@ -455,6 +461,11 @@ html {
   left: -1rem;
   opacity: 1;
   animation: spinPlayer 3s linear infinite;
+  animation-play-state: paused;
+}
+
+.player-wrapper.playing:hover .hover-vinyl-container {
+  animation-play-state: running;
 }
 
 .hover-vinyl-svg {
@@ -644,4 +655,81 @@ html {
 
 .player-wrapper:hover .icon-list {
   width: 20px;
+}
+
+.playlist-menu {
+  position: absolute;
+  bottom: 6rem;
+  right: -5rem;
+  width: 16rem;
+  background-color: oklch(100% 0.00011 271.152);
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px oklch(0% 0 0 / 0.5);
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  gap: 0.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 100;
+}
+
+.playlist-menu.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.playlist-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  color: oklch(0% 0 0);
+}
+
+.playlist-item:hover {
+  background-color: oklch(95% 0 0);
+}
+
+.playlist-item.active {
+  background-color: var(--indigo-100);
+}
+
+.playlist-item .mini-vinyl {
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid var(--zinc-400);
+  box-shadow: 0 2px 4px oklch(0% 0 0 / 0.1);
+  transition: transform 0.3s;
+}
+
+.playlist-item:hover .mini-vinyl {
+  transform: scale(1.1) rotate(45deg);
+}
+
+.playlist-item .infos {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.playlist-item .t-title {
+  margin: 0;
+  font-weight: 600;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.playlist-item .t-artist {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--zinc-600);
 }
