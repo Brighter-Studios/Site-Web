@@ -1,16 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap');
 /* css super organisé tkt */
 
+/* ouais ici on uttilise pas du rvb monsieur :)*/
 :root {
-  /* Couleurs originales */
-  --color-1: #DE443B;
-  --color-2: #006BB4;
-  --color-3: #162325;
-  /* Couleurs pour le media player */
-  --zinc-400: #a1a1aa;
-  --zinc-600: #52525b;
-  --indigo-100: #e0e7ff;
-  --gray-300: #d1d5db;
+  --color-1: oklch(53.2% 0.197 27.6);
+  --color-2: oklch(45.5% 0.164 245);
+  --color-3: oklch(18.2% 0.018 210);
+  --zinc-400: oklch(74.51% 0.01188 258.479);
+  --zinc-600: oklch(62.842% 0.01188 258.479);
+  --indigo-100: oklch(92.994% 0.03354 272.79);
+  --gray-300: oklch(87.168% 0.00944 258.479);
 }
 
 body,
@@ -203,6 +202,7 @@ html {
   letter-spacing: 2px;
   text-transform: uppercase;
   background: linear-gradient(135deg, oklch(53.2% 0.197 27.6), oklch(72.5% 0.16 27.6));
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 2px 2px 10px oklch(53.2% 0.197 27.6 / 30%);
@@ -389,7 +389,7 @@ html {
   transition: all 0.5s;
   border: 4px solid var(--zinc-400);
   border-radius: 50%;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px -1px oklch(0% 0 0 / 0.1);
   animation: spinPlayer 3s linear infinite;
 }
 
@@ -398,10 +398,10 @@ html {
   z-index: 10;
   width: 2rem;
   height: 2rem;
-  background-color: white;
+  background-color: oklch(100% 0.00011 271.152);
   border: 4px solid var(--zinc-400);
   border-radius: 50%;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px 0 oklch(0% 0 0 / 0.05);
   top: 3rem;
   left: 3rem;
 }
@@ -413,11 +413,11 @@ html {
   width: 10rem;
   height: 5rem;
   transition: all 0.3s;
-  background-color: white;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  background-color: oklch(100% 0.00011 271.152);
+  box-shadow: 0 4px 15px oklch(0% 0 0 / 0.4);
   border-radius: 1rem;
   overflow: hidden;
-  color: #000;
+  color: oklch(0% 0 0);
 }
 
 .player-wrapper:hover .player-box {
@@ -461,7 +461,7 @@ html {
   transition: all 0.5s;
   border: 4px solid var(--zinc-400);
   border-radius: 50%;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px -1px oklch(0% 0 0 / 0.1);
 }
 
 .hover-vinyl-hole {
@@ -469,10 +469,10 @@ html {
   z-index: 10;
   width: 1.5rem;
   height: 1.5rem;
-  background-color: white;
+  background-color: oklch(100% 0.00011 271.152);
   border: 4px solid var(--zinc-400);
   border-radius: 50%;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px 0 oklch(0% 0 0 / 0.05);
   top: 2.25rem;
   left: 2.25rem;
 }
@@ -561,7 +561,7 @@ html {
   appearance: none;
   width: 0.75rem;
   height: 0.75rem;
-  background-color: white;
+  background-color: oklch(100% 0.00011 271.152);
   border: 2px solid var(--zinc-400);
   border-radius: 50%;
   cursor: pointer;
@@ -571,11 +571,11 @@ html {
 .progress-slider::-moz-range-thumb {
   width: 0.75rem;
   height: 0.75rem;
-  background-color: white;
+  background-color: oklch(100% 0.00011 271.152);
   border: 2px solid var(--zinc-400);
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 4px oklch(0% 0 0 / 0.15);
 }
 
 .controls-row {
@@ -595,7 +595,7 @@ html {
   width: 3rem;
   height: 100%;
   cursor: pointer;
-  color: #000;
+  color: oklch(0% 0 0);
 }
 
 .peer-input {
